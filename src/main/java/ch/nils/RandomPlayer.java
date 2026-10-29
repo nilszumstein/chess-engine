@@ -3,6 +3,8 @@ package ch.nils;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.move.Move;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RandomPlayer implements Player{
@@ -11,7 +13,8 @@ public class RandomPlayer implements Player{
 
 
     public Move chooseMove(Board board) {
-        return board.legalMoves().get(random.nextInt(0, board.legalMoves().size()));
+        List<Move> list = (List<Move>) board.legalMoves();
+        return list.get(random.nextInt(0, list.size()));
     }
 
 
