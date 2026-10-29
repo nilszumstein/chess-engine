@@ -12,7 +12,7 @@ public class MaterialPlayer implements Player{
     public Move chooseMove(Board board){
         List<Move> alleZmöglichenZüge = (List<Move>) board.legalMoves();
         Side werBinIch = board.getSideToMove();
-        int maxPunkte = Integer.MIN_VALUE;
+        int maxPunkte = -1000000;
         int undWo = 0;
         for (int i = 0; i < alleZmöglichenZüge.size(); i++) {
             board.doMove(alleZmöglichenZüge.get(i));

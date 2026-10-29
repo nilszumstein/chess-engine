@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         MaterialPlayer Player1 = new MaterialPlayer();
-        RandomPlayer Player2 = new RandomPlayer();
+        MaterialWithDephtPlayer Player2 = new MaterialWithDephtPlayer(2);
         ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 1000);
         int unentschieden = 0;
         int siegePlayer1 = 0;
