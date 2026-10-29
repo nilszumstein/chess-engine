@@ -6,10 +6,11 @@ import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.move.Move;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MaterialPlayer implements Player{
     public Move chooseMove(Board board){
-        ArrayList<Move> alleZmöglichenZüge = (ArrayList<Move>) board.legalMoves();
+        List<Move> alleZmöglichenZüge = (List<Move>) board.legalMoves();
         Side werBinIch = board.getSideToMove();
         int maxPunkte = Integer.MIN_VALUE;
         int undWo = 0;
