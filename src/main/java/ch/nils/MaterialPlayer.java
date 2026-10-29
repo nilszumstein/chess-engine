@@ -7,9 +7,7 @@ import com.github.bhlangonijr.chesslib.move.Move;
 
 import java.util.ArrayList;
 
-public class MaterialPlayer implements Player{ {
-
-}
+public class MaterialPlayer implements Player{
     public Move chooseMove(Board board){
         ArrayList<Move> alleZmöglichenZüge = (ArrayList<Move>) board.legalMoves();
         Side werBinIch = board.getSideToMove();
@@ -17,8 +15,9 @@ public class MaterialPlayer implements Player{ {
         int undWo = 0;
         for (int i = 0; i < alleZmöglichenZüge.size(); i++) {
             board.doMove(alleZmöglichenZüge.get(i));
-            if(YourPointsCompardeToEnemy(board, werBinIch) > maxPunkte){
-                maxPunkte = YourPointsCompardeToEnemy(board, werBinIch);
+            int punkte = YourPointsCompardeToEnemy(board, werBinIch);
+            if(punkte > maxPunkte){
+                maxPunkte = punkte;
                 undWo = i;
             }
 
