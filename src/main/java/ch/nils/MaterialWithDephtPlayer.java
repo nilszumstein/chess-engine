@@ -7,6 +7,7 @@ import com.github.bhlangonijr.chesslib.move.Move;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MaterialWithDephtPlayer implements Player{
     private int deepness;
@@ -15,6 +16,7 @@ public class MaterialWithDephtPlayer implements Player{
     }
 
     public Move chooseMove(Board board){
+        Random random = new Random();
         List<Move> möglicheZüge = board.legalMoves();
         List<Integer> wieGutIstWas = new ArrayList<Integer>();
         for (int i = 0; i < möglicheZüge.size(); i++) {
@@ -30,7 +32,14 @@ public class MaterialWithDephtPlayer implements Player{
                 anWelcherStelle = i;
             }
         }
-        return möglicheZüge.get(anWelcherStelle);
+
+        List<Integer> wasAllesMax = new ArrayList<Integer>();
+        for (int i = 0; i < möglicheZüge.size(); i++) {
+            if(wieGutIstWas.get(i) == maxPunkte){
+                wasAllesMax.add(i);
+            }
+        }
+        return möglicheZüge.get(wasAllesMax.get(random.nextInt(0, wasAllesMax.size())));
     }
 
     private int meinehelfer(Board board, int deepness) {
@@ -43,7 +52,6 @@ public class MaterialWithDephtPlayer implements Player{
         if(deepness == 0){
             return YourPointsCompardeToEnemy(board);
         }
-        
         int besteZug = -1000000;
         List<Move> möglicheZüge = board.legalMoves();
         for (int i = 0; i < möglicheZüge.size(); i++) {
@@ -76,6 +84,6 @@ public class MaterialWithDephtPlayer implements Player{
         }
     }
     public String name() {
-        return "MaterialWithDepht";
+        return "MaterialWithDepht Depth: " + deepness;
     }
 }

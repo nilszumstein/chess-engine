@@ -7,16 +7,20 @@ import com.github.bhlangonijr.chesslib.move.Move;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MaterialPlayer implements Player{
     public Move chooseMove(Board board){
+        Random random = new Random();
         List<Move> alleZmöglichenZüge = (List<Move>) board.legalMoves();
+        List<Integer> wieGutIstWas = new ArrayList<Integer>();
         Side werBinIch = board.getSideToMove();
         int maxPunkte = -1000000;
         int undWo = 0;
         for (int i = 0; i < alleZmöglichenZüge.size(); i++) {
             board.doMove(alleZmöglichenZüge.get(i));
             int punkte = YourPointsCompardeToEnemy(board, werBinIch);
+            wieGutIstWas.add(punkte);
             if(punkte > maxPunkte){
                 maxPunkte = punkte;
                 undWo = i;
@@ -24,7 +28,15 @@ public class MaterialPlayer implements Player{
 
             board.undoMove();
         }
-        return alleZmöglichenZüge.get(undWo);
+
+
+        List<Integer> wasAllesMax = new ArrayList<Integer>();
+        for (int i = 0; i < alleZmöglichenZüge.size(); i++) {
+            if(wieGutIstWas.get(i) == maxPunkte){
+                wasAllesMax.add(i);
+            }
+        }
+        return alleZmöglichenZüge.get(wasAllesMax.get(random.nextInt(0, wasAllesMax.size())));
     }
     private int YourPointsCompardeToEnemy(Board board, Side side){
         int points = 0;
