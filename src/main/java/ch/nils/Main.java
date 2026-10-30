@@ -1,17 +1,13 @@
 package ch.nils;
 
-import com.github.bhlangonijr.chesslib.Board;
-
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
-        ManualPlayer Player1 = new ManualPlayer();
-        MaterialWithDephtPlayer Player2 = new MaterialWithDephtPlayer(5);
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 2);
+        MaterialWithDephtPlayer Player1 = new MaterialWithDephtPlayer(1);
+        RandomPlayer Player2 = new RandomPlayer();
+        ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 100);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;

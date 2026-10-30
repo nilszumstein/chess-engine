@@ -5,7 +5,7 @@ import com.github.bhlangonijr.chesslib.move.Move;
 
 import java.util.Scanner;
 
-public class ManualPlayer extends Player{
+public class ManuelPlayer extends Player{
     private Scanner scanner = new Scanner(System.in);
     @Override
     public Move chooseMove(Board board) {
@@ -15,7 +15,15 @@ public class ManualPlayer extends Player{
             System.out.println(board.getBackup().getLast().getMove());
         }
         System.out.println("Bitte gib dienen Zug ein");
-        return new Move(scanner.nextLine(), board.getSideToMove());
+        Move zugMussNochGetestetWerden = new Move(scanner.nextLine(), board.getSideToMove());
+        while(true){
+            if(board.legalMoves().contains(zugMussNochGetestetWerden)){
+                return zugMussNochGetestetWerden;
+            }else{
+                System.out.println("Zug war illegal, bitte gib einen neuen ein: ");
+                zugMussNochGetestetWerden = new Move(scanner.nextLine(), board.getSideToMove());
+            }
+        }
     }
 
     @Override

@@ -3,7 +3,6 @@ package ch.nils;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.move.Move;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

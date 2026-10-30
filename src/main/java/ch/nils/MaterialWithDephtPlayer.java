@@ -1,8 +1,6 @@
 package ch.nils;
 
 import com.github.bhlangonijr.chesslib.Board;
-import com.github.bhlangonijr.chesslib.Piece;
-import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.move.Move;
 
 import java.util.ArrayList;
@@ -10,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MaterialWithDephtPlayer extends Player{
-    private int deepness;
+    private final int deepness;
     public MaterialWithDephtPlayer(int deepnes) {
         this.deepness = deepnes;
     }
@@ -50,7 +48,7 @@ public class MaterialWithDephtPlayer extends Player{
             return 0;
         }
         if(deepness == 0){
-            return YourPointsCompardeToEnemy(board);
+            return Bewertung.yourPointsCompardeToEnemy(board, board.getSideToMove());
         }
         int besteZug = -1000000;
         List<Move> möglicheZüge = board.legalMoves();
@@ -65,24 +63,6 @@ public class MaterialWithDephtPlayer extends Player{
         return besteZug;
     }
 
-    private int YourPointsCompardeToEnemy(Board board){
-        int points = 0;
-        points = points + 100 * Long.bitCount(board.getBitboard(Piece.WHITE_PAWN));
-        points = points - 100 * Long.bitCount(board.getBitboard(Piece.BLACK_PAWN));
-        points = points + 320 * Long.bitCount(board.getBitboard(Piece.WHITE_KNIGHT));
-        points = points - 320 * Long.bitCount(board.getBitboard(Piece.BLACK_KNIGHT));
-        points = points + 330 * Long.bitCount(board.getBitboard(Piece.WHITE_BISHOP));
-        points = points - 330 * Long.bitCount(board.getBitboard(Piece.BLACK_BISHOP));
-        points = points + 500 * Long.bitCount(board.getBitboard(Piece.WHITE_ROOK));
-        points = points - 500 * Long.bitCount(board.getBitboard(Piece.BLACK_ROOK));
-        points = points + 900 * Long.bitCount(board.getBitboard(Piece.WHITE_QUEEN));
-        points = points - 900 * Long.bitCount(board.getBitboard(Piece.BLACK_QUEEN));
-        if(board.getSideToMove() == Side.WHITE){
-            return points;
-        }else{
-            return -points;
-        }
-    }
     @Override
     public String name() {
         return "MaterialWithDepht Depth: " + deepness;
