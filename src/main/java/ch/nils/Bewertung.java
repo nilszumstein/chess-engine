@@ -5,7 +5,7 @@ import com.github.bhlangonijr.chesslib.Piece;
 import com.github.bhlangonijr.chesslib.Side;
 
 public class Bewertung {
-    public static int yourPointsCompardeToEnemy(Board board, Side side){
+    public static int material(Board board, Side side){
         int points = 0;
         points = points + 100 * Long.bitCount(board.getBitboard(Piece.WHITE_PAWN));
         points = points - 100 * Long.bitCount(board.getBitboard(Piece.BLACK_PAWN));

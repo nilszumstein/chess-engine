@@ -14,15 +14,18 @@ public class ManuelPlayer extends Player{
         if(!board.getBackup().isEmpty()){
             System.out.println(board.getBackup().getLast().getMove());
         }
-        System.out.println("Bitte gib dienen Zug ein");
-        Move zugMussNochGetestetWerden = new Move(scanner.nextLine(), board.getSideToMove());
+
         while(true){
-            if(board.legalMoves().contains(zugMussNochGetestetWerden)){
-                return zugMussNochGetestetWerden;
-            }else{
-                System.out.println("Zug war illegal, bitte gib einen neuen ein: ");
-                zugMussNochGetestetWerden = new Move(scanner.nextLine(), board.getSideToMove());
+            System.out.println("Bitte gib dienen Zug ein");
+            try{
+                Move zug = new Move(scanner.nextLine(), board.getSideToMove());
+                if(board.legalMoves().contains(zug)){
+                    return zug;
+                }
+            }catch (Exception e){
+
             }
+            System.out.println("Der Zug war nicht erlaubt, bitte gib einen neuen ein.");
         }
     }
 

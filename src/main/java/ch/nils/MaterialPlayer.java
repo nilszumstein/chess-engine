@@ -16,19 +16,17 @@ public class MaterialPlayer extends Player{
         List<Integer> wieGutIstWas = new ArrayList<Integer>();
         Side werBinIch = board.getSideToMove();
         int maxPunkte = -1000000;
-        int undWo = 0;
         for (int i = 0; i < alleZmöglichenZüge.size(); i++) {
             board.doMove(alleZmöglichenZüge.get(i));
             int punkte;
             if (board.isMated()){
                 punkte = 100000000;
             }else{
-                punkte = Bewertung.yourPointsCompardeToEnemy(board, werBinIch);
+                punkte = Bewertung.material(board, werBinIch);
             }
             wieGutIstWas.add(punkte);
             if(punkte > maxPunkte){
                 maxPunkte = punkte;
-                undWo = i;
             }
 
             board.undoMove();

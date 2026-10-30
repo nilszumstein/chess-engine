@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        MaterialWithDephtPlayer Player1 = new MaterialWithDephtPlayer(1);
-        RandomPlayer Player2 = new RandomPlayer();
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 100);
+        MaterialWithDephtPlayer Player1 = new MaterialWithDephtPlayer(2);
+        MaterialWithDephtPlayer Player2 = new MaterialWithDephtPlayer(3);
+        ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 160);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;

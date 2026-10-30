@@ -23,11 +23,9 @@ public class MaterialWithDephtPlayer extends Player{
             board.undoMove();
         }
         int maxPunkte = -1000000;
-        int anWelcherStelle = 0;
         for (int i = 0; i < wieGutIstWas.size(); i++) {
             if(wieGutIstWas.get(i) > maxPunkte){
                 maxPunkte = wieGutIstWas.get(i);
-                anWelcherStelle = i;
             }
         }
 
@@ -48,7 +46,7 @@ public class MaterialWithDephtPlayer extends Player{
             return 0;
         }
         if(deepness == 0){
-            return Bewertung.yourPointsCompardeToEnemy(board, board.getSideToMove());
+            return Bewertung.material(board, board.getSideToMove());
         }
         int besteZug = -1000000;
         List<Move> möglicheZüge = board.legalMoves();
