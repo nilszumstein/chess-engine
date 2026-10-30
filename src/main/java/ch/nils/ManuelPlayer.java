@@ -16,7 +16,7 @@ public class ManuelPlayer extends Player{
         }
 
         while(true){
-            System.out.println("Bitte gib dienen Zug ein");
+            System.out.println("Bitte gib deinen Zug ein");
             try{
                 Move zug = new Move(scanner.nextLine(), board.getSideToMove());
                 if(board.legalMoves().contains(zug)){
