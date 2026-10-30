@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        MaterialPlayer Player1 = new MaterialPlayer();
-        MaterialWithDephtPlayer Player2 = new MaterialWithDephtPlayer(2);
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 1000);
+        ManualPlayer Player1 = new ManualPlayer();
+        MaterialWithDephtPlayer Player2 = new MaterialWithDephtPlayer(5);
+        ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 2);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;

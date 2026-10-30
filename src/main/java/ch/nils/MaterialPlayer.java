@@ -8,8 +8,8 @@ import com.github.bhlangonijr.chesslib.move.Move;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-public class MaterialPlayer implements Player{
+public class MaterialPlayer extends Player{
+    @Override
     public Move chooseMove(Board board){
         Random random = new Random();
         List<Move> alleZmöglichenZüge = (List<Move>) board.legalMoves();
@@ -64,6 +64,7 @@ public class MaterialPlayer implements Player{
             return -points;
         }
     }
+    @Override
     public String name() {
         return "Material";
     }

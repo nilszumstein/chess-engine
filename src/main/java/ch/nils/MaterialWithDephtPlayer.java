@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MaterialWithDephtPlayer implements Player{
+public class MaterialWithDephtPlayer extends Player{
     private int deepness;
     public MaterialWithDephtPlayer(int deepnes) {
         this.deepness = deepnes;
     }
-
+    @Override
     public Move chooseMove(Board board){
         Random random = new Random();
         List<Move> möglicheZüge = board.legalMoves();
@@ -83,6 +83,7 @@ public class MaterialWithDephtPlayer implements Player{
             return -points;
         }
     }
+    @Override
     public String name() {
         return "MaterialWithDepht Depth: " + deepness;
     }
