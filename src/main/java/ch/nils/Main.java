@@ -1,13 +1,18 @@
 package ch.nils;
 
+import com.github.bhlangonijr.chesslib.Board;
+
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
-        MaterialWithDephtPlayer Player1 = new MaterialWithDephtPlayer(2);
-        MaterialWithDephtPlayer Player2 = new MaterialWithDephtPlayer(3);
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(Player1, Player2, 160);
+        long start = System.currentTimeMillis();
+        MaterialWithDephtPlayer player1 = new MaterialWithDephtPlayer(3);
+        MaterialWithDephtPlayer player2 = new MaterialWithDephtPlayer(3);
+        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 100);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;
@@ -22,8 +27,9 @@ public class Main {
                 siegePlayer2++;
             }
         }
-        System.out.println(Player1.name() + ": " + siegePlayer1);
-        System.out.println(Player2.name() + ": " + siegePlayer2);
+        System.out.println(player1.name() + ": " + siegePlayer1);
+        System.out.println(player2.name() + ": " + siegePlayer2);
         System.out.println("Rémi: " + unentschieden);
+        System.out.println("Millisekunden: " + start);
     }
 }
