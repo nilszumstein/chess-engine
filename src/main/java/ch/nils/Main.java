@@ -30,6 +30,6 @@ public class Main {
         System.out.println(player1.name() + ": " + siegePlayer1);
         System.out.println(player2.name() + ": " + siegePlayer2);
         System.out.println("Rémi: " + unentschieden);
-        System.out.println("Millisekunden: " + start);
+        System.out.println("Millisekunden: " + (System.currentTimeMillis() - start));
     }
 }
