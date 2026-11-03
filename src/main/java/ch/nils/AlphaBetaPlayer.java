@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MindestensMaximalMaterialWithDepthEnhancedPlayer extends Player{
+public class AlphaBetaPlayer extends Player{
     private final int deepness;
-    public MindestensMaximalMaterialWithDepthEnhancedPlayer(int deepnes) {
+    public AlphaBetaPlayer(int deepnes) {
         this.deepness = deepnes;
     }
     @Override
@@ -70,6 +70,6 @@ public class MindestensMaximalMaterialWithDepthEnhancedPlayer extends Player{
     }
     @Override
     public String name() {
-        return "MindestensMaximalMaterialWithDepthEnhanced Depth: " + deepness;
+        return "AlphaBeta Depth: " + deepness;
     }
 }

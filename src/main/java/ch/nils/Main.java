@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        MindestensMaximalMaterialWithDepthEnhancedPlayer player1 = new MindestensMaximalMaterialWithDepthEnhancedPlayer(3);
-        MaterialWithDephtPlayer player2 = new MaterialWithDephtPlayer(3);
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 40);
+        AlphaBetaV2Player player1 = new AlphaBetaV2Player(4);
+        AlphaBetaPlayer player2 = new AlphaBetaPlayer(4);
+        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 10);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;
