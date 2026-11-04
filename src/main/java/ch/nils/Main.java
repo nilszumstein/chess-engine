@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         Player player1 = new ExtendAslongTakingV1Player(3);
-        AlphaBetaV6Player player2 = new AlphaBetaV6Player(3);
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 2);
+        Player player2 = new ExtendAslongTakingV1Player(3);
+        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 20);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;
@@ -27,8 +27,8 @@ public class Main {
                 siegePlayer2++;
             }
         }
-        System.out.println(player1.name() + ": " + siegePlayer1);
-        System.out.println(player2.name() + ": " + siegePlayer2);
+        System.out.println(player1.name() + "   Wins: " + siegePlayer1);
+        System.out.println(player2.name() + "   Wins: " + siegePlayer2);
         System.out.println("Rémi: " + unentschieden);
         System.out.println("Millisekunden: " + (System.currentTimeMillis() - start));
     }

@@ -105,6 +105,14 @@ public class ExtendAslongTakingV1Player extends Player{
         }
         zuegeDieFressen.sort(Comparator.comparingInt(zugMitWertung::bewertung).reversed());
 
+
+        int baseline = Bewertung.material(board, board.getSideToMove());
+        if(baseline > obergrenze){
+            return baseline;
+        }
+        if(baseline > untergrenze){
+            untergrenze = baseline;
+        }
         for (int i = 0; i < zuegeDieFressen.size(); i++) {
             board.doMove(zuegeDieFressen.get(i).zug);
             zuegeDieFressen.set(i, new zugMitWertung(zuegeDieFressen.get(i).zug, -meinhelferSobaldDeepnessErreicht(board,  -obergrenze, -untergrenze)));
@@ -121,6 +129,9 @@ public class ExtendAslongTakingV1Player extends Player{
             if(besterZug < zuegeDieFressen.get(i).bewertung){
                 besterZug = zuegeDieFressen.get(i).bewertung;
             }
+        }
+        if(baseline > besterZug){
+            return baseline;
         }
         return besterZug;
 
