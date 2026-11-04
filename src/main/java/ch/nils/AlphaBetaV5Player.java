@@ -74,7 +74,6 @@ public class AlphaBetaV5Player extends Player{
                 board.undoMove();
             }
             zuege.sort(Comparator.comparingInt(zugMitWertung::bewertung).reversed());
-
         }
 
 
