@@ -2,8 +2,10 @@ package ch.nils;
 
 import com.github.bhlangonijr.chesslib.Board;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -11,7 +13,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         Player player1 = new ExtendAslongTakingV1Player(4);
         Player player2 = new RandomPlayer();
@@ -30,10 +32,8 @@ public class Main {
                 siegePlayer2++;
             }
         }
-        System.out.println(player1.name() + "   Wins: " + siegePlayer1);
-        System.out.println(player2.name() + "   Wins: " + siegePlayer2);
-        System.out.println("Rémi: " + unentschieden);
-        System.out.println("Millisekunden: " + (System.currentTimeMillis() - start));
-        String zeile = "Uhrzeit: " + LocalDateTime.now() + "; Computername: " + System.getenv("COMPUTERNAME") + "; ";
+        String zeile = "Uhrzeit: " + LocalDateTime.now() + "; Computername: " + System.getenv("COMPUTERNAME") + "; " + player1.name() + player2.name() + "Player1siege: " + siegePlayer1 + "; Player2siege: " + siegePlayer2 + "; Rémi: " + unentschieden + "; ZeitMillisekunden: " + (System.currentTimeMillis() - start) + ";";
+        System.out.println(zeile);
+        Files.writeString(Path.of("autoTestergebnisse.csv"), zeile + "\n", StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 }

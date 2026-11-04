@@ -50,7 +50,7 @@ public class ExtendAslongTakingV1Player extends Player{
     }
 
     private int meinehelfer(Board board, int deepness, int untergrenze, int obergrenze) {
-        System.out.println(board);
+        //System.out.println(board);
         wieVieleHelfer++;
         if(deepness == 0){
             return meinhelferSobaldDeepnessErreicht(board, untergrenze, obergrenze);
@@ -93,7 +93,7 @@ public class ExtendAslongTakingV1Player extends Player{
         return besterZug;
     }
     private int meinhelferSobaldDeepnessErreicht(Board board, int untergrenze, int obergrenze){
-        System.out.println(board);
+        //System.out.println(board);
         wieVieleHelfer++;
         List<zugMitWertung> zuegeDieFressen = new ArrayList<zugMitWertung>();
         Move[] tempMoves = board.legalMoves().toArray(new Move[0]);
