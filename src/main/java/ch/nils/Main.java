@@ -2,6 +2,9 @@ package ch.nils;
 
 import com.github.bhlangonijr.chesslib.Board;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -10,8 +13,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        Player player1 = new ExtendAslongTakingV1Player(3);
-        Player player2 = new ExtendAslongTakingV1Player(3);
+        Player player1 = new RandomPlayer();
+        Player player2 = new RandomPlayer();
         ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 20);
         int unentschieden = 0;
         int siegePlayer1 = 0;
@@ -31,5 +34,6 @@ public class Main {
         System.out.println(player2.name() + "   Wins: " + siegePlayer2);
         System.out.println("Rémi: " + unentschieden);
         System.out.println("Millisekunden: " + (System.currentTimeMillis() - start));
+        String zeile = "Uhrzeit: " + LocalDateTime.now() + "; Computername: " + System.getenv("COMPUTERNAME") + "; ";
     }
 }
