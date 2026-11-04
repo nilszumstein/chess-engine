@@ -50,6 +50,7 @@ public class AlphaBetaV6Player extends Player{
     }
 
     private int meinehelfer(Board board, int deepness, int untergrenze, int obergrenze) {
+        //System.out.println(board);
         wieVieleHelfer++;
         if(deepness == 0){
             return Bewertung.material(board, board.getSideToMove());
