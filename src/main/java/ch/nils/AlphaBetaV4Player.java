@@ -19,7 +19,7 @@ public class AlphaBetaV4Player extends Player{
     @Override
     public Move chooseMove(Board board){
         if(deepness < 3){
-            AlphaBetaPlayer TempPlayer = new AlphaBetaPlayer(deepness);
+            AlphaBetaV1Player TempPlayer = new AlphaBetaV1Player(deepness);
             return TempPlayer.chooseMove(board);
         }else {
             Random random = new Random();

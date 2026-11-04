@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AlphaBetaPlayer extends Player{
+public class AlphaBetaV1Player extends Player{
     private final int deepness;
-    public AlphaBetaPlayer(int deepnes) {
+    private int wieVieleKnoten = 0;
+    public AlphaBetaV1Player(int deepnes) {
         this.deepness = deepnes;
     }
     @Override
@@ -39,7 +40,7 @@ public class AlphaBetaPlayer extends Player{
     }
 
     private int meinehelfer(Board board, int deepness, int untergrenze, int obergrenze) {
-
+        wieVieleKnoten++;
         if(board.isMated()){
             return -100000;
         }
@@ -70,6 +71,6 @@ public class AlphaBetaPlayer extends Player{
     }
     @Override
     public String name() {
-        return "AlphaBeta Depth: " + deepness;
+        return "AlphaBetaV1 Depth: " + deepness + " Knoten: " + wieVieleKnoten;
     }
 }
