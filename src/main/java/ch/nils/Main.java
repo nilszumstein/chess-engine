@@ -34,6 +34,6 @@ public class Main {
         }
         String zeile = "Uhrzeit: " + LocalDateTime.now() + "; Computername: " + System.getenv("COMPUTERNAME") + "; " + player1.name() + player2.name() + "Player1siege: " + siegePlayer1 + "; Player2siege: " + siegePlayer2 + "; Rémi: " + unentschieden + "; ZeitMillisekunden: " + (System.currentTimeMillis() - start) + ";";
         System.out.println(zeile);
-        Files.writeString(Path.of("autoTestergebnisse.csv"), zeile + "\n", StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        Files.writeString(Path.of("AutoTestergebnisse.csv"), zeile + "\n", StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 }

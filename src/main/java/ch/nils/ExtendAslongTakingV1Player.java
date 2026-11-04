@@ -18,35 +18,31 @@ public class ExtendAslongTakingV1Player extends Player{
 
 
     @Override
-    public Move chooseMove(Board board){
-        if(deepness < 3){
-            AlphaBetaV1Player TempPlayer = new AlphaBetaV1Player(deepness);
-            return TempPlayer.chooseMove(board);
-        }else {
-            Random random = new Random();
-            List<zugMitWertung> zuege = new ArrayList<zugMitWertung>();
-            Move[] tempMoves = board.legalMoves().toArray(new Move[0]);
-            for (int i = 0; i < tempMoves.length; i++) {
-                zuege.add(new zugMitWertung(tempMoves[i], 0));
-            }
-            for (int i = 0; i < zuege.size(); i++) {
-                board.doMove(zuege.get(i).zug);
-                zuege.set(i, new zugMitWertung(zuege.get(i).zug, -meinehelfer(board, 2 - 1, -1000000, 1000000)));
-                board.undoMove();
-            }
-            zuege.sort(Comparator.comparingInt(zugMitWertung::bewertung).reversed());
-            for (int i = 0; i < zuege.size(); i++) {
-                board.doMove(zuege.get(i).zug);
-                zuege.set(i, new zugMitWertung(zuege.get(i).zug, -meinehelfer(board, deepness - 1, -1000000, 1000000)));
-                board.undoMove();
-            }
-            zuege.sort(Comparator.comparingInt(zugMitWertung::bewertung).reversed());
-            int i = 0;
-            while(i < zuege.size() && zuege.getFirst().bewertung == zuege.get(i).bewertung){
-                i++;
-            }
-            return zuege.get(random.nextInt(0, i)).zug;
+    public Move chooseMove(Board board) {
+        Random random = new Random();
+        List<zugMitWertung> zuege = new ArrayList<zugMitWertung>();
+        Move[] tempMoves = board.legalMoves().toArray(new Move[0]);
+        for (int i = 0; i < tempMoves.length; i++) {
+            zuege.add(new zugMitWertung(tempMoves[i], 0));
         }
+        for (int i = 0; i < zuege.size(); i++) {
+            board.doMove(zuege.get(i).zug);
+            zuege.set(i, new zugMitWertung(zuege.get(i).zug, -meinehelfer(board, 2 - 1, -1000000, 1000000)));
+            board.undoMove();
+        }
+        zuege.sort(Comparator.comparingInt(zugMitWertung::bewertung).reversed());
+        for (int i = 0; i < zuege.size(); i++) {
+            board.doMove(zuege.get(i).zug);
+            zuege.set(i, new zugMitWertung(zuege.get(i).zug, -meinehelfer(board, deepness - 1, -1000000, 1000000)));
+            board.undoMove();
+        }
+        zuege.sort(Comparator.comparingInt(zugMitWertung::bewertung).reversed());
+        int i = 0;
+        while (i < zuege.size() && zuege.getFirst().bewertung == zuege.get(i).bewertung) {
+            i++;
+        }
+        return zuege.get(random.nextInt(0, i)).zug;
+
     }
 
     private int meinehelfer(Board board, int deepness, int untergrenze, int obergrenze) {
