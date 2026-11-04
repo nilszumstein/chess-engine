@@ -104,10 +104,11 @@ public class ExtendAslongTakingV1Player extends Player{
             return Bewertung.material(board, board.getSideToMove());
         }
         zuegeDieFressen.sort(Comparator.comparingInt(zugMitWertung::bewertung).reversed());
-
-
+        for (int i = 0; i < zuegeDieFressen.size(); i++) {
+            zuegeDieFressen.set(i, new zugMitWertung(zuegeDieFressen.get(i).zug, -10000000));
+        }
         int baseline = Bewertung.material(board, board.getSideToMove());
-        if(baseline > obergrenze){
+        if(baseline >= obergrenze){
             return baseline;
         }
         if(baseline > untergrenze){
