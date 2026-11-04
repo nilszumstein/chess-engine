@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        AlphaBetaV2Player player1 = new AlphaBetaV2Player(4);
-        AlphaBetaPlayer player2 = new AlphaBetaPlayer(4);
+        AlphaBetaV4Player player1 = new AlphaBetaV4Player(4);
+        AlphaBetaV4Player player2 = new AlphaBetaV4Player(4);
         ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 10);
         int unentschieden = 0;
         int siegePlayer1 = 0;
