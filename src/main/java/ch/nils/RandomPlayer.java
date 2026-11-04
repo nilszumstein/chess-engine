@@ -18,6 +18,6 @@ public class RandomPlayer extends Player{
 
     @Override
     public String name() {
-        return "Random";
+        return "Name: Random; ";
     }
 }

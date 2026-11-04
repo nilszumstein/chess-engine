@@ -100,6 +100,6 @@ public class AlphaBetaV4Player extends Player{
     }
     @Override
     public String name() {
-        return "AlphaBetaV4 Depth: " + deepness;
+        return "Name: AlphaBetaV4; Depth: " + deepness + "; ";
     }
 }

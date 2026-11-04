@@ -43,6 +43,6 @@ public class MaterialPlayer extends Player{
     }
     @Override
     public String name() {
-        return "Material";
+        return "Name Material; ";
     }
 }

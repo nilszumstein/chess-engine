@@ -63,6 +63,6 @@ public class MaterialWithDephtPlayer extends Player{
 
     @Override
     public String name() {
-        return "MaterialWithDepht Depth: " + deepness;
+        return "Name: MaterialWithDepht; Depth: " + deepness + "; ";
     }
 }

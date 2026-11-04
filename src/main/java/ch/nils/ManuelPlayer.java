@@ -31,6 +31,6 @@ public class ManuelPlayer extends Player{
 
     @Override
     public String name() {
-        return "Manuel Player";
+        return "Manuel Player;";
     }
 }
