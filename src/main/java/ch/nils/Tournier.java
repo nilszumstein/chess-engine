@@ -15,7 +15,7 @@ public class Tournier {
         List<Player> mitspieler = new ArrayList<Player>();
         mitspieler.add(new RandomPlayer());
         mitspieler.add(new AlphaBetaV6Player(4));
-        mitspieler.add(new MaterialPlayer());
+        mitspieler.add(new AlphaBetaV6Player(1));
         mitspieler.add(new ExtendAslongTakingV1Player(3));
         mitspieler.add(new ExtendAslongTakingV1Player(4));
         mitspieler.add(new TimeV1Player(1000));
