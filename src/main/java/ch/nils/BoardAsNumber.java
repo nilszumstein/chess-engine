@@ -3,21 +3,28 @@ package ch.nils;
 import com.github.bhlangonijr.chesslib.*;
 
 public class BoardAsNumber {
+    private static String als64bits(Long zahl){
+        String zahlalsstring = String.valueOf(zahl);
+        while(zahlalsstring.length() < 64){
+            zahlalsstring = "0" + zahlalsstring;
+        }
+        return zahlalsstring;
+    }
     public static float[] boardAsNumber(Board board){
         String ergebnisAlsString = "";
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.WHITE_PAWN));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.WHITE_KNIGHT));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.WHITE_BISHOP));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.WHITE_ROOK));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.WHITE_QUEEN));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.WHITE_KING));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_PAWN));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_KNIGHT));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_BISHOP));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_ROOK));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_QUEEN));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_KING));
 
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.BLACK_PAWN));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.BLACK_KNIGHT));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.BLACK_BISHOP));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.BLACK_ROOK));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.BLACK_QUEEN));
-        ergebnisAlsString = ergebnisAlsString + Long.toBinaryString(board.getBitboard(Piece.BLACK_KING));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_PAWN));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_KNIGHT));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_BISHOP));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_ROOK));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_QUEEN));
+        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_KING));
 
         if(board.getSideToMove() == Side.WHITE){
             ergebnisAlsString = ergebnisAlsString + "1";
