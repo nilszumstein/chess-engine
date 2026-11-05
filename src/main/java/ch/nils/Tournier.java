@@ -10,13 +10,14 @@ import java.util.List;
 
 public class Tournier {
     public static void main(String[] args) throws IOException {
-        int howManyGames = 10;
+        int howManyGames = 50;
 
         List<Player> mitspieler = new ArrayList<Player>();
         mitspieler.add(new RandomPlayer());
         mitspieler.add(new AlphaBetaV6Player(4));
         mitspieler.add(new MaterialPlayer());
         mitspieler.add(new ExtendAslongTakingV1Player(3));
+        mitspieler.add(new ExtendAslongTakingV1Player(4));
         mitspieler.add(new TimeV1Player(1000));
         for (int i = 0; i < mitspieler.size(); i++) {
             for (int j = 0; j < mitspieler.size(); j++) {
