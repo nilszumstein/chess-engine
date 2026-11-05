@@ -3,7 +3,7 @@ package ch.nils;
 import com.github.bhlangonijr.chesslib.*;
 
 public class BoardAsNumber {
-    public static float boardAsNumber(Board board){
+    public static float[] boardAsNumber(Board board){
         String ergebnisAlsString = "";
         ergebnisAlsString = ergebnisAlsString + board.getBitboard(Piece.WHITE_PAWN);
         ergebnisAlsString = ergebnisAlsString + board.getBitboard(Piece.WHITE_KNIGHT);
@@ -45,9 +45,13 @@ public class BoardAsNumber {
         }else{
             ergebnisAlsString = ergebnisAlsString + "00";
         }
+        float[] turns = new float[773];
+        for (int i = 0; i < 773; i++) {
+            turns[i] = ergebnisAlsString.charAt(i);
+        }
 
 
-        return Float.parseFloat(ergebnisAlsString);
+        return turns;
 
     }
 }
