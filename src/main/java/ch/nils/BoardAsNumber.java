@@ -4,7 +4,7 @@ import com.github.bhlangonijr.chesslib.*;
 
 public class BoardAsNumber {
     private static String als64bits(Long zahl){
-        String zahlalsstring = String.valueOf(zahl);
+        String zahlalsstring = Long.toBinaryString(zahl);
         while(zahlalsstring.length() < 64){
             zahlalsstring = "0" + zahlalsstring;
         }
