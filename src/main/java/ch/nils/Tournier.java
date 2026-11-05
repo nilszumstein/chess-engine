@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Tournier {
     public static void main(String[] args) throws IOException {
-        int howManyGames = 50;
+        int howManyGames = 4;
 
         List<Player> mitspieler = new ArrayList<Player>();
         mitspieler.add(new RandomPlayer());
