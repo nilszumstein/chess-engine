@@ -24,7 +24,9 @@ public class NeuralNetwork {
     public float howGoodIsBoard(float[] bitboard){
         List<Float> zwispeiLayer1 = new ArrayList<Float>();
         List<Float> zwispeiLayer2 = new ArrayList<Float>();
-        zwispeiLayer1 = bitboard;
+        for (int i = 0; i < bitboard.length; i++) {
+            zwispeiLayer1.add(bitboard[i]);
+        }
         float kleinesZwischenspeichern;
         for (int i = 0; i < weights.size(); i++) {
             for (int j = 0; j < weights.get(i).length; j++) {
@@ -36,6 +38,7 @@ public class NeuralNetwork {
                 kleinesZwischenspeichern = (float) ((1 / (1 + Math.exp(-kleinesZwischenspeichern))) -0.5f) * 2;
                 zwispeiLayer2.add(kleinesZwischenspeichern);
             }
+            zwispeiLayer1.clear();
             zwispeiLayer1 = zwispeiLayer2;
             zwispeiLayer2.clear();
         }
