@@ -32,7 +32,6 @@ public class NeuralNetwork {
 
 
 
-    //Mein gedanke war ncoh, dass jedes File ein eigenes file bekommt, und das einfahc in einem ordner ist, der Der ort auswählt, in der diese klasser erstellt wird.
 
     void loadNetworkFromFile(){
         //hier muss ich irgendwie das modell laden können.
@@ -126,6 +125,7 @@ public class NeuralNetwork {
         nn.setLayers(this.layers);
         nn.setGeneration(this.generation);
         nn.setWeights(this.weights);
+        nn.gewichteBiaseLeichtVerändern();
         return nn;
     }
 
