@@ -7,30 +7,39 @@ import java.util.Random;
 public class NeuralNetwork {
     private List<float[][]> weights;
     private List<float[]> bias;
-    private final int[] layers;
-    public NeuralNetwork(int[] layers) {
+    private int[] layers;
+    private String filePath;
+
+    public NeuralNetwork(String filePath) {
+        //Dieser constrikrot ist für wenn cih ein Modell laden will
+        this.filePath = filePath;
+        //hier kommt dan acuh gleich noch der code, der die daten weights, bias und layers aus dem File lät
+    }
+    public NeuralNetwork(String filePath, int[] layers) {
+        //Dieser konstruktor ist, für wenn ich ein neues modell machen will und zwas am orx x speicerhn
+        this.filePath = filePath;
         this.layers = layers;
+        neuralNetworkInitialParameters();
     }
 
 
-
-
-    public float howGoodIsBoard(float[] bitboard){
+    public float howGoodIsBoard(List<Float> bitboard){
+        List<Float> zwispeiLayer1 = new ArrayList<Float>();
+        List<Float> zwispeiLayer2 = new ArrayList<Float>();
+        zwispeiLayer1 = bitboard;
+        float kleinesZwischenspeichern;
         for (int i = 0; i < weights.size(); i++) {
             for (int j = 0; j < weights.get(i).length; j++) {
+                kleinesZwischenspeichern = 0f;
                 for (int k = 0; k < weights.get(i)[j].length; k++) {
-
+                    kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1.get(j) * weights.get(i)[j][k];
                 }
+                kleinesZwischenspeichern = kleinesZwischenspeichern + bias.get(i)[j];
+                zwispeiLayer2.add(kleinesZwischenspeichern);
             }
+            zwispeiLayer1 = zwispeiLayer2;
         }
-
-
-
-
-
-
-
-        return 3.2f;
+        return zwispeiLayer1.getFirst();
     }
 
 
@@ -42,8 +51,17 @@ public class NeuralNetwork {
 
 
 
+    //Mein gedanke war ncoh, dass jedes File ein eigenes file bekommt, und das einfahc in einem ordner ist, der Der ort auswählt, in der diese klasser erstellt wird.
+    void gewichteBiaseLeichtVerändern(){
+        //wenn dieses modell erfolgerich war, kann ich eine kopie machen, und bei der Kopie diese methode ausführen, die die gewichte leicht verändert und biase auch.
+    }
+    void loadNetworkFromFile(){
+        //hier muss ich irgendwie das modell laden können.
+    }
+    void saveNetworkToFile(){
+        //hier muss ihc irgendwie ein modell speichern können
+    }
 
-    void loadNetworkFromFile(){}
     void neuralNetworkInitialParameters(){
         Random random = new Random();
         List<float[][]> initalWeights = new ArrayList<>();
@@ -73,4 +91,5 @@ public class NeuralNetwork {
         this.weights = initalWeights;
         this.bias = initalBias;
     }
+
 }
