@@ -7,6 +7,9 @@ import java.util.Random;
 public class NeuralNetwork {
     private List<float[][]> weights;
     private List<float[]> bias;
+
+
+
     private int[] layers;
     private int score;
     private int generation;
@@ -117,6 +120,14 @@ public class NeuralNetwork {
         this.weights = initalWeights;
         this.bias = initalBias;
     }
+    public NeuralNetwork makeCopy(){
+        NeuralNetwork nn = new NeuralNetwork();
+        nn.setBias(this.bias);
+        nn.setLayers(this.layers);
+        nn.setGeneration(this.generation);
+        nn.setWeights(this.weights);
+        return nn;
+    }
 
     public int getScore() {
         return score;
@@ -129,5 +140,23 @@ public class NeuralNetwork {
     }
     public void setGeneration(int generation) {
         this.generation = generation;
+    }
+    public int[] getLayers() {
+        return layers;
+    }
+    public void setLayers(int[] layers) {
+        this.layers = layers;
+    }
+    public List<float[][]> getWeights() {
+        return weights;
+    }
+    public void setWeights(List<float[][]> weights) {
+        this.weights = weights;
+    }
+    public List<float[]> getBias() {
+        return bias;
+    }
+    public void setBias(List<float[]> bias) {
+        this.bias = bias;
     }
 }
