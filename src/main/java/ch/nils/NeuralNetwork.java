@@ -8,16 +8,14 @@ public class NeuralNetwork {
     private List<float[][]> weights;
     private List<float[]> bias;
     private int[] layers;
-    private String filePath;
 
-    public NeuralNetwork(String filePath) {
+    //Wie ich das mit dem Filepath mache ist mir noch unklar.
+    public NeuralNetwork() {
         //Dieser constrikrot ist für wenn cih ein Modell laden will
-        this.filePath = filePath;
         //hier kommt dan acuh gleich noch der code, der die daten weights, bias und layers aus dem File lät
     }
-    public NeuralNetwork(String filePath, int[] layers) {
+    public NeuralNetwork(int[] layers) {
         //Dieser konstruktor ist, für wenn ich ein neues modell machen will und zwas am orx x speicerhn
-        this.filePath = filePath;
         this.layers = layers;
         neuralNetworkInitialParameters();
     }
@@ -32,12 +30,14 @@ public class NeuralNetwork {
             for (int j = 0; j < weights.get(i).length; j++) {
                 kleinesZwischenspeichern = 0f;
                 for (int k = 0; k < weights.get(i)[j].length; k++) {
-                    kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1.get(j) * weights.get(i)[j][k];
+                    kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1.get(k) * weights.get(i)[k][j];
                 }
                 kleinesZwischenspeichern = kleinesZwischenspeichern + bias.get(i)[j];
+                kleinesZwischenspeichern = (float) ((1 / (1 + Math.exp(-kleinesZwischenspeichern))) -0.5f) * 2;
                 zwispeiLayer2.add(kleinesZwischenspeichern);
             }
             zwispeiLayer1 = zwispeiLayer2;
+            zwispeiLayer2.clear();
         }
         return zwispeiLayer1.getFirst();
     }
