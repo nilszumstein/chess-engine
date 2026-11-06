@@ -15,9 +15,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        Player player1 = new ExtendAslongTakingV1Player(4);
-        Player player2 = new RandomPlayer();
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 4);
+        Player player1 = new RandomPlayer();
+        Player player2 = new ch.nils.MaterialPlayer();
+        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 1000);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;

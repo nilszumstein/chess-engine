@@ -21,6 +21,23 @@ public class NeuralNetwork {
     }
 
 
+
+
+
+
+
+
+    //Mein gedanke war ncoh, dass jedes File ein eigenes file bekommt, und das einfahc in einem ordner ist, der Der ort auswählt, in der diese klasser erstellt wird.
+
+    void loadNetworkFromFile(){
+        //hier muss ich irgendwie das modell laden können.
+    }
+    void saveNetworkToFile(){
+        //hier muss ihc irgendwie ein modell speichern können
+    }
+
+
+
     public float howGoodIsBoard(float[] bitboard){
         List<Float> zwispeiLayer1 = new ArrayList<Float>();
         List<Float> zwispeiLayer2 = new ArrayList<Float>();
@@ -35,36 +52,41 @@ public class NeuralNetwork {
                     kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1.get(k) * weights.get(i)[k][j];
                 }
                 kleinesZwischenspeichern = kleinesZwischenspeichern + bias.get(i)[j];
-                kleinesZwischenspeichern = (float) ((1 / (1 + Math.exp(-kleinesZwischenspeichern))) -0.5f) * 2;
+                kleinesZwischenspeichern = (float) (1 / (1 + Math.exp(-kleinesZwischenspeichern)));
                 zwispeiLayer2.add(kleinesZwischenspeichern);
             }
             zwispeiLayer1 = zwispeiLayer2;
             zwispeiLayer2 = new ArrayList<>();
+
+
         }
         return zwispeiLayer1.getFirst();
     }
+    public void gewichteBiaseLeichtVerändern(){
+        Random random = new Random();
+        List<float[][]> initalWeights = this.weights;
+        List<float[]> initalBias = this.bias;
 
-
-
-
-
-
-
-
-
-
-    //Mein gedanke war ncoh, dass jedes File ein eigenes file bekommt, und das einfahc in einem ordner ist, der Der ort auswählt, in der diese klasser erstellt wird.
-    void gewichteBiaseLeichtVerändern(){
-        //wenn dieses modell erfolgerich war, kann ich eine kopie machen, und bei der Kopie diese methode ausführen, die die gewichte leicht verändert und biase auch.
+        for (int i = 0; i < initalBias.size(); i++) {
+            for (int j = 0; j < initalBias.get(i).length; j++) {
+                float[] copyOfBiasOne = initalBias.get(i);
+                copyOfBiasOne[j] = copyOfBiasOne[j] + (float) (random.nextGaussian() / 100);
+                initalBias.set(i, copyOfBiasOne);
+            }
+        }
+        for (int i = 0; i < initalWeights.size(); i++) {
+            for (int j = 0; j < initalWeights.get(i).length; j++) {
+                for (int k = 0; k < initalWeights.get(i)[j].length; k++) {
+                    float[][] copyOfWeightOne = initalWeights.get(i);
+                    copyOfWeightOne[j][k] = copyOfWeightOne[j][k] + (float) (random.nextGaussian() / 100);
+                    initalWeights.set(i, copyOfWeightOne);
+                }
+            }
+        }
+        this.weights = initalWeights;
+        this.bias = initalBias;
     }
-    void loadNetworkFromFile(){
-        //hier muss ich irgendwie das modell laden können.
-    }
-    void saveNetworkToFile(){
-        //hier muss ihc irgendwie ein modell speichern können
-    }
-
-    void neuralNetworkInitialParameters(){
+    private void neuralNetworkInitialParameters(){
         Random random = new Random();
         List<float[][]> initalWeights = new ArrayList<>();
         List<float[]> initalBias = new ArrayList<>();
