@@ -8,6 +8,8 @@ public class NeuralNetwork {
     private List<float[][]> weights;
     private List<float[]> bias;
     private int[] layers;
+    private int score;
+    private int generation;
 
     //Wie ich das mit dem Filepath mache ist mir noch unklar.
     public NeuralNetwork() {
@@ -116,4 +118,16 @@ public class NeuralNetwork {
         this.bias = initalBias;
     }
 
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
+    public int getGeneration() {
+        return generation;
+    }
+    public void setGeneration(int generation) {
+        this.generation = generation;
+    }
 }

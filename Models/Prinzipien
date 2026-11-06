@@ -1,0 +1,39 @@
+Hier schreibe ich auf, wie ich es mir vorstelle, wie die Datenbank sein soll.
+Score = (wins + remi*0.5) * modell
+
+Score für jedes Moddel
+random = 1
+AlphaBeta[1] = 5
+AlphaBeta[2] = 15
+AlphaBeta[3] = 50
+ExtendAslongTaking[1] = 75
+ExtendAslongTaking[2] = 200
+ExtendAslongTaking[3] = 500
+ExtendAslongTakinh[4] = 1000
+
+Damit scores Fär sind, muss das verbessern, immer mit 100Partien gemacht werden, um den Bot zu bewerten.
+
+grundsächliche Ordnerstruktur
+Models
+    Layerstruktur(als Name)
+        Generation(als Name)
+            Die 50 besten Bots
+                (Ein file soll so Aufgebaut werden, ummer zuerst score, dann Layers. und erst dann alle Weights und biases.
+
+    AllTimeBests
+        Alle 50 Bots, die den Höchsten score haben(nicht automatisch aktualisierend, muss ich manuel bei einem File sagen, dass das aktuelisiert werden soll.
+
+
+
+
+
+Als info+ Immer nur die Bots der neusten 2 generationen sollen behalten werden, bei den Alteren, soll nur der Beste bot behalten werden, die anderen sollen gelöscht werden.
+
+
+
+
+
+
+Nach frage, ist diese aufbaustruktur / idee gut? wie sollte ich die Scores pro modell verändern? Welches fileformat sollen die Bots haben? Wich kann ich es schaffen, das die daten, relativ zum projekt machen, und nicht absolut, weil bei meinem Zuhause liegt das projekt an einem anderen ort als Beim arbeiten?Wie soll cih die files nennen?
+
+und noch eine Frage, ich kann ja nicht ein kind dieser Methode in der methode machen, dann ist ja das kind nur in dieser kalsse erreichbar, sollte ich die kinder sozusagen einfach basierend den files der guten machen? Was ist .mvn ?
