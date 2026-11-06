@@ -21,7 +21,7 @@ public class NeuralNetwork {
     }
 
 
-    public float howGoodIsBoard(List<Float> bitboard){
+    public float howGoodIsBoard(float[] bitboard){
         List<Float> zwispeiLayer1 = new ArrayList<Float>();
         List<Float> zwispeiLayer2 = new ArrayList<Float>();
         zwispeiLayer1 = bitboard;
