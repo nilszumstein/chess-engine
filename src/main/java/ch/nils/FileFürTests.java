@@ -8,7 +8,9 @@ import static ch.nils.BoardAsNumber.boardAsNumber;
 
 public class FileFürTests {
     public static void main(String[] args){
+        NeuralNetwork nn = new NeuralNetwork(new int[]{733, 15, 15, 1});
         Board board = new Board();
-        System.out.println(Arrays.toString(boardAsNumber(board)));
+        System.out.println(nn.howGoodIsBoard(BoardAsNumber.boardAsNumber(board)));
+
     }
 }

@@ -29,18 +29,17 @@ public class NeuralNetwork {
         }
         float kleinesZwischenspeichern;
         for (int i = 0; i < weights.size(); i++) {
-            for (int j = 0; j < weights.get(i).length; j++) {
+            for (int j = 0; j < layers[i + 1]; j++) {
                 kleinesZwischenspeichern = 0f;
-                for (int k = 0; k < weights.get(i)[j].length; k++) {
+                for (int k = 0; k < layers[i]; k++) {
                     kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1.get(k) * weights.get(i)[k][j];
                 }
                 kleinesZwischenspeichern = kleinesZwischenspeichern + bias.get(i)[j];
                 kleinesZwischenspeichern = (float) ((1 / (1 + Math.exp(-kleinesZwischenspeichern))) -0.5f) * 2;
                 zwispeiLayer2.add(kleinesZwischenspeichern);
             }
-            zwispeiLayer1.clear();
             zwispeiLayer1 = zwispeiLayer2;
-            zwispeiLayer2.clear();
+            zwispeiLayer2 = new ArrayList<>();
         }
         return zwispeiLayer1.getFirst();
     }
