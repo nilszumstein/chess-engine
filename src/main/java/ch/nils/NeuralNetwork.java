@@ -5,35 +5,72 @@ import java.util.List;
 import java.util.Random;
 
 public class NeuralNetwork {
-    private List<Float[][]> weights;
-    private List<Float[]> bias;
-    private void neuralNetworkInitialParameters(int[] layers){
-        Random random = new Random();
-        List<Float[][]> weights = new ArrayList<>();
-        List<Float[]> bias = new ArrayList<>();
-        for (int i = 1; i < layers.length; i++) {
-            bias.add(new Float[layers[i]]);
-        }
-        for (int i = 0; i < bias.size(); i++) {
-            for (int j = 0; j < bias.get(i).length; j++) {
-                Float[] copyOfBiasOne = bias.get(i);
-                copyOfBiasOne[j] = (float) (random.nextGaussian() / 10);
-                bias.set(i, copyOfBiasOne);
-            }
-        }
-        for (int i = 1; i < layers.length; i++) {
-            weights.add(new Float[layers[i - 1]][layers[i]]);
-        }
+    private List<float[][]> weights;
+    private List<float[]> bias;
+    private final int[] layers;
+    public NeuralNetwork(int[] layers) {
+        this.layers = layers;
+    }
+
+
+
+
+    public float howGoodIsBoard(float[] bitboard){
         for (int i = 0; i < weights.size(); i++) {
             for (int j = 0; j < weights.get(i).length; j++) {
                 for (int k = 0; k < weights.get(i)[j].length; k++) {
-                    Float[][] copyOfWeightOne = weights.get(i);
-                    copyOfWeightOne[j][k] = (float) (random.nextGaussian() / 10);
-                    weights.set(i, copyOfWeightOne);
+
                 }
             }
         }
-        this.weights = weights;
-        this.bias = bias;
+
+
+
+
+
+
+
+        return 3.2f;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    void loadNetworkFromFile(){}
+    void neuralNetworkInitialParameters(){
+        Random random = new Random();
+        List<float[][]> initalWeights = new ArrayList<>();
+        List<float[]> initalBias = new ArrayList<>();
+        for (int i = 1; i < layers.length; i++) {
+            initalBias.add(new float[layers[i]]);
+        }
+        for (int i = 0; i < initalBias.size(); i++) {
+            for (int j = 0; j < initalBias.get(i).length; j++) {
+                float[] copyOfBiasOne = initalBias.get(i);
+                copyOfBiasOne[j] = (float) (random.nextGaussian() / 10);
+                initalBias.set(i, copyOfBiasOne);
+            }
+        }
+        for (int i = 1; i < layers.length; i++) {
+            initalWeights.add(new float[layers[i - 1]][layers[i]]);
+        }
+        for (int i = 0; i < initalWeights.size(); i++) {
+            for (int j = 0; j < initalWeights.get(i).length; j++) {
+                for (int k = 0; k < initalWeights.get(i)[j].length; k++) {
+                    float[][] copyOfWeightOne = initalWeights.get(i);
+                    copyOfWeightOne[j][k] = (float) (random.nextGaussian() / 10);
+                    initalWeights.set(i, copyOfWeightOne);
+                }
+            }
+        }
+        this.weights = initalWeights;
+        this.bias = initalBias;
     }
 }
