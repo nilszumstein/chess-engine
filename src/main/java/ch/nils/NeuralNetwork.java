@@ -3,11 +3,9 @@ package ch.nils;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.nio.file.Path;
 
 public class NeuralNetwork {
     private List<float[][]> weights;
@@ -19,24 +17,71 @@ public class NeuralNetwork {
     private double score;
     private int generation;
 
-    //Wie ich das mit dem Filepath mache ist mir noch unklar.
-    public NeuralNetwork() {
-        //Dieser constrikrot ist für wenn cih ein Modell laden will
-        //hier kommt dan acuh gleich noch der code, der die daten weights, bias und layers aus dem File lät
+
+
+    public NeuralNetwork(File file) {
+        //hier werden daten, des Neural networks von file von oben geladen
     }
     public NeuralNetwork(int[] layers) {
-        //Dieser konstruktor ist, für wenn ich ein neues modell machen will und zwas am orx x speicerhn
         this.layers = layers;
         neuralNetworkInitialParameters();
     }
 
-    void loadNetworkFromFile(){
-        //hier muss ich irgendwie das modell laden können.
+
+    void loadNetworkFromFile(Path dateiWeg){
+        try (DataInputStream fileImporter = new DataInputStream(new BufferedInputStream(new FileInputStream(dateiWeg.toFile())))) {
+            List<float[][]> initalWeights = new ArrayList<>();
+            List<float[]> initalBias = new ArrayList<>();
+            this.score = fileImporter.readDouble();
+            this.generation = fileImporter.readInt();
+            int wieVieleSchichtenHatLayers = fileImporter.readInt();
+            this.layers = new int[wieVieleSchichtenHatLayers];
+            for (int i = 0; i < wieVieleSchichtenHatLayers; i++) {
+                this.layers[i] = fileImporter.readInt();
+            }
+            for (int i = 1; i < layers.length; i++) {
+                initalBias.add(new float[layers[i]]);
+            }
+            for (int i = 0; i < initalBias.size(); i++) {
+                for (int j = 0; j < initalBias.get(i).length; j++) {
+                    float[] copyOfBiasOne = initalBias.get(i);
+                    copyOfBiasOne[j] = fileImporter.readFloat();
+                    initalBias.set(i, copyOfBiasOne);
+                }
+            }
+
+            for (int i = 1; i < layers.length; i++) {
+                initalWeights.add(new float[layers[i - 1]][layers[i]]);
+            }
+            for (int i = 0; i < initalWeights.size(); i++) {
+                for (int j = 0; j < initalWeights.get(i).length; j++) {
+                    for (int k = 0; k < initalWeights.get(i)[j].length; k++) {
+                        float[][] copyOfWeightOne = initalWeights.get(i);
+                        copyOfWeightOne[j][k] = fileImporter.readFloat();
+                        initalWeights.set(i, copyOfWeightOne);
+                    }
+                }
+            }
+            this.weights = initalWeights;
+            this.bias = initalBias;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+
+
+
+
+
     void saveNetworkToFile(Path dateiPath) throws IOException {
+        Files.createDirectories(dateiPath.getParent());
         try(DataOutputStream  stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(dateiPath.toFile())))){
             stream.writeDouble(score);
             stream.writeInt(generation);
+            stream.writeInt(layers.length);
             for (int i = 0; i < layers.length; i++) {
                 stream.writeInt(layers[i]);
             }
@@ -133,15 +178,6 @@ public class NeuralNetwork {
         }
         this.weights = initalWeights;
         this.bias = initalBias;
-    }
-    public NeuralNetwork makeCopy(int newGeneration){
-        NeuralNetwork nn = new NeuralNetwork();
-        nn.setBias(bias);
-        nn.setLayers(layers);
-        nn.setGeneration(newGeneration);
-        nn.setWeights(weights);
-        nn.gewichteBiaseLeichtVerändern();
-        return nn;
     }
 
     public double getScore() {

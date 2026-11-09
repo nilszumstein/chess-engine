@@ -1,15 +1,14 @@
 Hier schreibe ich auf, wie ich es mir vorstelle, wie die Datenbank sein soll.
-Score = (wins + remi*0.5) hinter score soll auch noch stehen, gegen welches level sie gespielt hanem
+Score = (wins + remi*0.5 * score von Modell) hinter score soll auch noch stehen, gegen welches level sie gespielt hanem
 
-hier die levels
-random = 1
-AlphaBeta[1] = 2
-AlphaBeta[2] = 3
-AlphaBeta[3] = 4
-ExtendAslongTaking[1] = 5
-ExtendAslongTaking[2] = 6
-ExtendAslongTaking[3] = 7
-ExtendAslongTakinh[4] = 8
+Scores
+Random = 1
+AlphaBeta[1] = 21
+AlphaBeta[2] = 441
+AlphaBeta[3] = 9261
+ExtendAslongTaking[2] = 194481
+ExtendAsLongTaking[3] = 4084101
+ExtendAslongTaking[4] = 85766121
 
 Damit scores Fär sind, muss das verbessern, immer mit 20 Partien gemacht werden, um den Bot zu bewerten.
 
@@ -19,10 +18,7 @@ Models
         Generation(als Name)
             Die 50 besten Bots
                 platzXX.bin
-                    (Ein file soll so Aufgebaut werden, ummer zuerst score, generation, dann Layers. und erst dann alle bias und weights.
-
-    AllTimeBests
-        Alle 50 Bots, die den Höchsten score haben(nicht automatisch aktualisierend, muss ich manuel bei einem File sagen, dass das aktuelisiert werden soll.
+                    (Ein file soll so Aufgebaut werden, ummer zuerst score, generation, layersLänge, dann Layers. und erst dann alle bias und weights.
 
 
 
