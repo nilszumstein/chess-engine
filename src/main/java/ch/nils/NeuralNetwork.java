@@ -1,6 +1,7 @@
 package ch.nils;
 
 import java.io.BufferedWriter;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,7 +32,8 @@ public class NeuralNetwork {
         //hier muss ich irgendwie das modell laden können.
     }
     void saveNetworkToFile(String dateiPath){
-
+        stringBuilder.append(score).append("\n");
+        stringBuilder.append(generation).append("\n");
     }
 
     public float howGoodIsBoard(float[] bitboard){
