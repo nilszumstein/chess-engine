@@ -17,8 +17,6 @@ public class Tournier {
         mitspieler.add(new AlphaBetaV6Player(4));
         mitspieler.add(new AlphaBetaV6Player(1));
         mitspieler.add(new ExtendAslongTakingV1Player(3));
-        mitspieler.add(new ExtendAslongTakingV1Player(4));
-        mitspieler.add(new TimeV1Player(1000));
         for (int i = 0; i < mitspieler.size(); i++) {
             for (int j = 0; j < mitspieler.size(); j++) {
                 if(i == j){

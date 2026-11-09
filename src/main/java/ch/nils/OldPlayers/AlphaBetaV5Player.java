@@ -1,5 +1,8 @@
-package ch.nils;
+package ch.nils.OldPlayers;
 
+import ch.nils.AlphaBetaV1Player;
+import ch.nils.Bewertung;
+import ch.nils.Player;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.move.Move;
 
@@ -8,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-public class AlphaBetaV5Player extends Player{
+public class AlphaBetaV5Player extends Player {
     private final int deepness;
     public AlphaBetaV5Player(int deepnes) {
         this.deepness = deepnes;
