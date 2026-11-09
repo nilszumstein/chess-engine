@@ -1,5 +1,6 @@
 package ch.nils;
 
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +12,7 @@ public class NeuralNetwork {
 
 
     private int[] layers;
-    private int score;
+    private double score;
     private int generation;
 
     //Wie ich das mit dem Filepath mache ist mir noch unklar.
@@ -37,7 +38,7 @@ public class NeuralNetwork {
         //hier muss ich irgendwie das modell laden können.
     }
     void saveNetworkToFile(){
-        //hier muss ihc irgendwie ein modell speichern können
+        
     }
 
 
@@ -119,20 +120,20 @@ public class NeuralNetwork {
         this.weights = initalWeights;
         this.bias = initalBias;
     }
-    public NeuralNetwork makeCopy(){
+    public NeuralNetwork makeCopy(int newGeneration){
         NeuralNetwork nn = new NeuralNetwork();
-        nn.setBias(this.bias);
-        nn.setLayers(this.layers);
-        nn.setGeneration(this.generation);
-        nn.setWeights(this.weights);
+        nn.setBias(bias);
+        nn.setLayers(layers);
+        nn.setGeneration(newGeneration);
+        nn.setWeights(weights);
         nn.gewichteBiaseLeichtVerändern();
         return nn;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
-    public void setScore(int score) {
+    public void setScore(double score) {
         this.score = score;
     }
     public int getGeneration() {

@@ -17,7 +17,7 @@ grundsächliche Ordnerstruktur
 Models
     Layerstruktur(als Name)
         Generation(als Name)
-            Die 10 besten Bots
+            Die 50 besten Bots
                 platzXX.bin
                     (Ein file soll so Aufgebaut werden, ummer zuerst score, generation, dann Layers. und erst dann alle Weights und biases.
 
