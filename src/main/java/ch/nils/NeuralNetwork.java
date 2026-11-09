@@ -1,10 +1,14 @@
 package ch.nils;
 
-import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public class NeuralNetwork {
     private List<float[][]> weights;
@@ -15,7 +19,6 @@ public class NeuralNetwork {
     private int[] layers;
     private double score;
     private int generation;
-    private StringBuilder stringBuilder = new StringBuilder();
 
     //Wie ich das mit dem Filepath mache ist mir noch unklar.
     public NeuralNetwork() {
@@ -31,9 +34,9 @@ public class NeuralNetwork {
     void loadNetworkFromFile(){
         //hier muss ich irgendwie das modell laden können.
     }
-    void saveNetworkToFile(String dateiPath){
-        stringBuilder.append(score).append("\n");
-        stringBuilder.append(generation).append("\n");
+    void saveNetworkToFile(Path dateiPath) throws IOException {
+        Files.createDirectories(dateiPath.getParent());
+        Files.writeString(dateiPath, score + "\n" + generation + "\n");
     }
 
     public float howGoodIsBoard(float[] bitboard){
