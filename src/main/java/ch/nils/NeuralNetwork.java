@@ -14,6 +14,7 @@ public class NeuralNetwork {
     private int[] layers;
     private double score;
     private int generation;
+    private StringBuilder stringBuilder = new StringBuilder();
 
     //Wie ich das mit dem Filepath mache ist mir noch unklar.
     public NeuralNetwork() {
@@ -26,22 +27,12 @@ public class NeuralNetwork {
         neuralNetworkInitialParameters();
     }
 
-
-
-
-
-
-
-
-
     void loadNetworkFromFile(){
         //hier muss ich irgendwie das modell laden können.
     }
-    void saveNetworkToFile(){
-        
+    void saveNetworkToFile(String dateiPath){
+
     }
-
-
 
     public float howGoodIsBoard(float[] bitboard){
         List<Float> zwispeiLayer1 = new ArrayList<Float>();
