@@ -1,9 +1,5 @@
-package ch.nils.OldPlayers;
+package ch.nils;
 
-import ch.nils.Bewertung;
-import ch.nils.BoardAsNumber;
-import ch.nils.NeuralNetwork;
-import ch.nils.Player;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.move.Move;
@@ -43,6 +39,6 @@ public class NNPlayer extends Player {
 
     @Override
     public String name() {
-        return "Neural network| Gen " + nn.getGeneration() + "| Layers " + Arrays.toString(nn.getLayers());
+        return "Name: NN; Gen: " + nn.getGeneration() + "; Layers: " + Arrays.toString(nn.getLayers()) + "; ";
     }
 }
