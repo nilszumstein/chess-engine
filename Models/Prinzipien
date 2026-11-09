@@ -19,7 +19,7 @@ Models
         Generation(als Name)
             Die 50 besten Bots
                 platzXX.bin
-                    (Ein file soll so Aufgebaut werden, ummer zuerst score, generation, dann Layers. und erst dann alle Weights und biases.
+                    (Ein file soll so Aufgebaut werden, ummer zuerst score, generation, dann Layers. und erst dann alle bias und weights.
 
     AllTimeBests
         Alle 50 Bots, die den Höchsten score haben(nicht automatisch aktualisierend, muss ich manuel bei einem File sagen, dass das aktuelisiert werden soll.

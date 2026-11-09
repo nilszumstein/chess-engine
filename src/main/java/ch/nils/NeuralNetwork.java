@@ -1,13 +1,12 @@
 package ch.nils;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.io.IOException;
 import java.nio.file.Path;
 
 public class NeuralNetwork {
@@ -35,8 +34,25 @@ public class NeuralNetwork {
         //hier muss ich irgendwie das modell laden können.
     }
     void saveNetworkToFile(Path dateiPath) throws IOException {
-        Files.createDirectories(dateiPath.getParent());
-        Files.writeString(dateiPath, score + "\n" + generation + "\n");
+        try(DataOutputStream  stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(dateiPath.toFile())))){
+            stream.writeDouble(score);
+            stream.writeInt(generation);
+            for (int i = 0; i < layers.length; i++) {
+                stream.writeInt(layers[i]);
+            }
+            for (int i = 0; i < bias.size(); i++) {
+                for (int j = 0; j < bias.get(i).length; j++) {
+                    stream.writeFloat(bias.get(i)[j]);
+                }
+            }
+            for (int i = 0; i < weights.size(); i++) {
+                for (int j = 0; j < weights.get(i).length; j++) {
+                    for (int k = 0; k < weights.get(i)[j].length; k++) {
+                        stream.writeFloat(weights.get(i)[j][k]);
+                    }
+                }
+            }
+        }
     }
 
     public float howGoodIsBoard(float[] bitboard){
@@ -91,6 +107,7 @@ public class NeuralNetwork {
         Random random = new Random();
         List<float[][]> initalWeights = new ArrayList<>();
         List<float[]> initalBias = new ArrayList<>();
+
         for (int i = 1; i < layers.length; i++) {
             initalBias.add(new float[layers[i]]);
         }
@@ -101,6 +118,7 @@ public class NeuralNetwork {
                 initalBias.set(i, copyOfBiasOne);
             }
         }
+
         for (int i = 1; i < layers.length; i++) {
             initalWeights.add(new float[layers[i - 1]][layers[i]]);
         }
