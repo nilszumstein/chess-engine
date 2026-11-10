@@ -23,7 +23,7 @@ public class Tournier{
 
                 }else{
                     long start = System.currentTimeMillis();
-                    ArrayList<Integer> list = Partie.PartieSpielenLassen(mitspieler.get(i), mitspieler.get(j), howManyGames);
+                    ArrayList<Integer> list = Partie.partieSpielenLassen(mitspieler.get(i), mitspieler.get(j), howManyGames);
                     int unentschieden = 0;
                     int siegePlayer1 = 0;
                     int siegePlayer2 = 0;

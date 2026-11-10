@@ -17,7 +17,7 @@ public class Main {
         long start = System.currentTimeMillis();
         Player player1 = new RandomPlayer();
         Player player2 = new ch.nils.MaterialPlayer();
-        ArrayList<Integer> list = Partie.PartieSpielenLassen(player1, player2, 1000);
+        ArrayList<Integer> list = Partie.partieSpielenLassen(player1, player2, 1000);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;

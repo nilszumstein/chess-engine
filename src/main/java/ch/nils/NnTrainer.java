@@ -26,7 +26,13 @@ public class NnTrainer {
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
 
         File[] ordners = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/").listFiles(File::isDirectory);
-        int generation = ordners.length;
+        int generation = 0;
+        if(ordners == null){
+            generation = 0;
+        }else{
+            generation = ordners.length;
+        }
+
 
         if(generation == 0){
             neuralNetworksArray = makeNewRandom(layers);
