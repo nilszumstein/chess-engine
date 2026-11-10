@@ -5,7 +5,7 @@ import com.github.bhlangonijr.chesslib.Board;
 import java.util.ArrayList;
 
 public class Partie {
-    public static ArrayList<Integer> PartieSpielenLassen(Player player1, Player player2, int howManyGames){
+    public static ArrayList<Integer> partieSpielenLassen(Player player1, Player player2, int howManyGames){
         ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i < howManyGames / 2; i++) {
             Board board = new Board();

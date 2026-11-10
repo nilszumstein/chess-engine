@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tournier {
+public class Tournier{
     public static void main(String[] args) throws IOException {
         int howManyGames = 4;
 

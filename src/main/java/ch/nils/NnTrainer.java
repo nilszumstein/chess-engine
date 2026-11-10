@@ -2,20 +2,26 @@ package ch.nils;
 
 import com.github.bhlangonijr.chesslib.Board;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 import static ch.nils.BoardAsNumber.boardAsNumber;
 
 public class NnTrainer {
+    /*
+     to-do wenn man generation ändert:
 
+     Modell eechseln
+     modelwert beim score berechnen ändern
+     beim sout max score ändern
+    */
     public static void main(String[] args) throws IOException {
         //Erstes immer 773 letztes immer 1
         int[] layers = {773, 16, 16, 1};
-        int wieVieleGenerationen = 100;
 
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
 
@@ -25,47 +31,61 @@ public class NnTrainer {
         if(generation == 0){
             neuralNetworksArray = makeNewRandom(layers);
         }else{
-            neuralNetworksArray = resumeSession(layers);
+            for (int i = 0; i < 50; i++) {
+                neuralNetworksArray.add(new NeuralNetwork(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + i)));
+            }
         }
 
-        while(wieVieleGenerationen > 0){
-            if(!(generation == 0)){
-                //Für stelle 50-99: die 50 der aktuell letzten(die aktuelle generation zahl) generation laden.(und nacher mutieren)
+        while(true) {
+
+
+            if (!(generation == 0)) {
+                for (int i = 0; i < 50; i++) {
+                    File file = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + i);
+                    neuralNetworksArray.add(new NeuralNetwork(file));
+                }
             }
+
+
             generation++;
             for (int i = 50; i < 100; i++) {
                 neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern();
             }
             for (int i = 0; i < 100; i++) {
-                //neuralnetwork i die spiele spielen lassen, und danach den Score berechnen und setzten, bei score
+                neuralNetworksArray.get(i).generationErhöhen();
+                Partie partie = new Partie();
+                Integer[] ergebnisse = Partie.partieSpielenLassen(new NNPlayer(neuralNetworksArray.get(i)), new RandomPlayer(), 20).toArray(new Integer[0]);
+                double score = 0;
+                for (int j = 0; j < 100; j++) {
+                    if (ergebnisse[j] == -1) {
+                    } else if (ergebnisse[j] == 0) {
+                        score = score + 0.5;
+                    } else {
+                        score++;
+                    }
+                }
+                score = score * 1;
+                neuralNetworksArray.get(i).setScore(score);
             }
 
-            //neuralNetworksArray.sort(Comparator.comparingInt(neuralNetworksArray.score()::score).reversed());
+            neuralNetworksArray.sort(Comparator.comparingDouble(NeuralNetwork::getScore).reversed());
 
             for (int i = 0; i < 50; i++) {
                 neuralNetworksArray.removeLast();
             }
 
             for (int i = 0; i < 50; i++) {
-                //werte der arrays, unter ordner layers/generation/i
+                neuralNetworksArray.get(i).saveNetworkToFile(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + i));
             }
-            if(generation > 2)
-            for (int i = 0; i < 49; i++) {
-                //remove layers/(generation - 2)/(49 - i)
+            if (generation > 2) {
+                for (int i = 49; 0 < i; i--) {
+                    Files.delete(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
+                }
             }
-            wieVieleGenerationen--;
+            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (1 * 20));
         }
-
-
     }
 
-    private static ArrayList<NeuralNetwork> resumeSession(int[] layers){
-        /*
-        hier muss ihc die 50 NNs der neusten(finde ich heraus indem ich schaue wie viele ordner hat es in ordner layers) generation
-        ladenzund unten bei return, returnen.
-         */
-        return new ArrayList<NeuralNetwork>();
-    }
     private static ArrayList<NeuralNetwork> makeNewRandom(int[] layers){
 
         ArrayList<NeuralNetwork> nNs = new ArrayList<>();
@@ -76,9 +96,3 @@ public class NnTrainer {
         return nNs;
     }
 }
-//"Models/allDiffrentLayers/LayerXYZ/genXXXX/ModelXX(1beste 50 schlechtest, der besseren hälfte)"
-
-
-
-
-

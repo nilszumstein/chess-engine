@@ -99,7 +99,9 @@ public class NeuralNetwork {
             }
         }
     }
-
+    public void generationErhöhen(){
+        this.generation++;
+    }
     public float howGoodIsBoard(float[] bitboard){
         List<Float> zwispeiLayer1 = new ArrayList<Float>();
         List<Float> zwispeiLayer2 = new ArrayList<Float>();
