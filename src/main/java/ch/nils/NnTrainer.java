@@ -14,7 +14,7 @@ public class NnTrainer {
 
     public static void main(String[] args) throws IOException {
         //Erstes immer 773 letztes immer 1
-        int[] layers = {1, 2};
+        int[] layers = {773, 16, 16, 1};
         int wieVieleGenerationen = 100;
 
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
@@ -23,6 +23,7 @@ public class NnTrainer {
 
         //generation = wie viele ordner es in ordner mit LAYERS als name hat.
         int generation = 0;
+        //das muss ich noch ändern
 
         if(generation == 0){
             neuralNetworksArray = makeNewRandom(layers);
@@ -32,7 +33,7 @@ public class NnTrainer {
 
         while(wieVieleGenerationen > 0){
             if(!(generation == 0)){
-                //die 50 der aktuell neusten generation laden.
+                //Für stelle 50-99: die 50 der aktuell letzten(die aktuelle generation zahl) generation laden.(und nacher mutieren)
             }
             generation++;
             for (int i = 50; i < 100; i++) {
@@ -51,8 +52,9 @@ public class NnTrainer {
             for (int i = 0; i < 50; i++) {
                 //werte der arrays, unter ordner layers/generation/i
             }
+            if(generation > 2)
             for (int i = 0; i < 49; i++) {
-                //remove layers/(generation - 1)/(50 - i)
+                //remove layers/(generation - 2)/(49 - i)
             }
             wieVieleGenerationen--;
         }
