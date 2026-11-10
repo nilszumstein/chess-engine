@@ -59,10 +59,9 @@ public class NnTrainer {
             }
             for (int i = 0; i < 100; i++) {
                 neuralNetworksArray.get(i).generationErhöhen();
-                Partie partie = new Partie();
                 Integer[] ergebnisse = Partie.partieSpielenLassen(new NNPlayer(neuralNetworksArray.get(i)), new RandomPlayer(), 20).toArray(new Integer[0]);
                 double score = 0;
-                for (int j = 0; j < 100; j++) {
+                for (int j = 0; j < ergebnisse.length; j++) {
                     if (ergebnisse[j] == -1) {
                     } else if (ergebnisse[j] == 0) {
                         score = score + 0.5;
@@ -85,7 +84,7 @@ public class NnTrainer {
             }
             if (generation > 2) {
                 for (int i = 49; 0 < i; i--) {
-                    Files.delete(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
+                    Files.deleteIfExists(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
                 }
             }
             System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (1 * 20));
