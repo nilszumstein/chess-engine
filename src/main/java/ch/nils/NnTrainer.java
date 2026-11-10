@@ -19,11 +19,8 @@ public class NnTrainer {
 
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
 
-
-
-        //generation = wie viele ordner es in ordner mit LAYERS als name hat.
-        int generation = 0;
-        //das muss ich noch ändern
+        File[] ordners = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/").listFiles(File::isDirectory);
+        int generation = ordners.length;
 
         if(generation == 0){
             neuralNetworksArray = makeNewRandom(layers);
