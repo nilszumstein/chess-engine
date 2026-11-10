@@ -21,7 +21,7 @@ public class NnTrainer {
     */
     public static void main(String[] args) throws IOException {
         //Erstes immer 773 letztes immer 1
-        int[] layers = {773, 16, 16, 1};
+        int[] layers = {773, 1};
 
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
 

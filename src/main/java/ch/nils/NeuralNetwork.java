@@ -20,7 +20,7 @@ public class NeuralNetwork {
 
 
     public NeuralNetwork(File file) {
-        //hier werden daten, des Neural networks von file von oben geladen
+        loadNetworkFromFile(file);
     }
     public NeuralNetwork(int[] layers) {
         this.layers = layers;
