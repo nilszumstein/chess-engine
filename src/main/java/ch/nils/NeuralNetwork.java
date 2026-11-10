@@ -28,8 +28,8 @@ public class NeuralNetwork {
     }
 
 
-    void loadNetworkFromFile(Path dateiWeg){
-        try (DataInputStream fileImporter = new DataInputStream(new BufferedInputStream(new FileInputStream(dateiWeg.toFile())))) {
+    void loadNetworkFromFile(File file){
+        try (DataInputStream fileImporter = new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
             List<float[][]> initalWeights = new ArrayList<>();
             List<float[]> initalBias = new ArrayList<>();
             this.score = fileImporter.readDouble();
@@ -76,9 +76,9 @@ public class NeuralNetwork {
 
 
 
-    void saveNetworkToFile(Path dateiPath) throws IOException {
-        Files.createDirectories(dateiPath.getParent());
-        try(DataOutputStream  stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(dateiPath.toFile())))){
+    void saveNetworkToFile(File file) throws IOException {
+        Files.createDirectories(Path.of(file.getParent()));
+        try(DataOutputStream  stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))){
             stream.writeDouble(score);
             stream.writeInt(generation);
             stream.writeInt(layers.length);
