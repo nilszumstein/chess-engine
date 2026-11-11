@@ -1,22 +1,17 @@
 package ch.nils;
 
-import com.github.bhlangonijr.chesslib.Board;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
-
 
 public class Main {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        Player player1 = new RandomPlayer();
-        Player player2 = new ch.nils.MaterialPlayer();
+        Player player1 = new ManuelPlayer();
+        Player player2 = new TimeV1Player(10000);
         ArrayList<Integer> list = Partie.partieSpielenLassen(player1, player2, 1000);
         int unentschieden = 0;
         int siegePlayer1 = 0;
@@ -34,6 +29,6 @@ public class Main {
         }
         String zeile = "Uhrzeit: " + LocalDateTime.now() + "; Computername: " + System.getenv("COMPUTERNAME") + "; " + player1.name() + player2.name() + "Player1siege: " + siegePlayer1 + "; Player2siege: " + siegePlayer2 + "; Rémi: " + unentschieden + "; ZeitMillisekunden: " + (System.currentTimeMillis() - start) + ";";
         System.out.println(zeile);
-        Files.writeString(Path.of("AutoTestergebnisse.csv"), zeile + "\n", StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        Files.writeString(Path.of("AutoTestergebnisse.csv"), zeile + "\n");
     }
 }

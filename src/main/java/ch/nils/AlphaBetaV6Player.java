@@ -13,7 +13,7 @@ public class AlphaBetaV6Player extends Player{
     public AlphaBetaV6Player(int deepnes) {
         this.deepness = deepnes;
     }
-    private int wieVieleHelfer = 0;
+    private long wieVieleHelfer = 0;
     record zugMitWertung(Move zug, int bewertung) {}
 
 
@@ -46,16 +46,15 @@ public class AlphaBetaV6Player extends Player{
     }
 
     private int meinehelfer(Board board, int deepness, int untergrenze, int obergrenze) {
-        //System.out.println(board);
         wieVieleHelfer++;
-        if(deepness == 0){
-            return Bewertung.material(board, board.getSideToMove());
-        }
         if(board.isMated()){
             return -100000;
         }
         if(board.isDraw()){
             return 0;
+        }
+        if(deepness == 0){
+            return Bewertung.material(board, board.getSideToMove());
         }
         Move[] tempMoves = board.legalMoves().toArray(new Move[0]);
         List<zugMitWertung> zuege = new ArrayList<zugMitWertung>();

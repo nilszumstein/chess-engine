@@ -13,7 +13,7 @@ public class TimeV1Player extends Player{
     public TimeV1Player(int time) {
         this.time = time;
     }
-    private int wieVieleHelfer = 0;
+    private long wieVieleHelfer = 0;
     record zugMitWertung(Move zug, int bewertung) {}
 
 

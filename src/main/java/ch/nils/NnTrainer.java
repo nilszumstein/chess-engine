@@ -1,35 +1,31 @@
 package ch.nils;
 
-import com.github.bhlangonijr.chesslib.Board;
 
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
-import static ch.nils.BoardAsNumber.boardAsNumber;
 
 public class NnTrainer {
     /*
-     to-do wenn man generation ändert:
+     to-do, wenn man generation ändert:
 
-     Modell eechseln
-     modelwert beim score berechnen ändern
-     beim sout max score ändern
+     Modelle wechseln
+     Modellwert beim score berechnen ändern
+     beim System.out.println max score ändern
     */
-    public static void main(String[] args) throws IOException {
+    static void main(String[] args) throws IOException {
         //Erstes immer 773 letztes immer 1
-        int[] layers = {773, 1};
+        int[] layers = {773, 16, 16, 1};
 
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
 
         File[] ordners = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/").listFiles(File::isDirectory);
         int generation = 0;
-        if(ordners == null){
-            generation = 0;
-        }else{
+        if(!(ordners == null)){
             generation = ordners.length;
         }
 
@@ -57,6 +53,24 @@ public class NnTrainer {
             for (int i = 50; i < 100; i++) {
                 neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern();
             }
+
+            neuralNetworksArray.parallelStream().forEach(element -> {
+                element.generationErhöhen();
+                Integer[] ergebnisse = Partie.partieSpielenLassen(new NNPlayer(element), new RandomPlayer(), 20).toArray(new Integer[0]);
+                double score = 0;
+                for (int j = 0; j < ergebnisse.length; j++) {
+                    if (ergebnisse[j] == -1) {
+                    } else if (ergebnisse[j] == 0) {
+                        score = score + 0.5;
+                    } else {
+                        score++;
+                    }
+                }
+                score = score * 1;
+                element.setScore(score);
+            });
+
+            /*
             for (int i = 0; i < 100; i++) {
                 neuralNetworksArray.get(i).generationErhöhen();
                 Integer[] ergebnisse = Partie.partieSpielenLassen(new NNPlayer(neuralNetworksArray.get(i)), new RandomPlayer(), 20).toArray(new Integer[0]);
@@ -72,7 +86,7 @@ public class NnTrainer {
                 score = score * 1;
                 neuralNetworksArray.get(i).setScore(score);
             }
-
+             */
             neuralNetworksArray.sort(Comparator.comparingDouble(NeuralNetwork::getScore).reversed());
 
             for (int i = 0; i < 50; i++) {

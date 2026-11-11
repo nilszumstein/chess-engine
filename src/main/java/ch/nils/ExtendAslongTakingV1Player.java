@@ -13,7 +13,7 @@ public class ExtendAslongTakingV1Player extends Player{
     public ExtendAslongTakingV1Player(int deepnes) {
         this.deepness = deepnes;
     }
-    private int wieVieleHelfer = 0;
+    private long wieVieleHelfer = 0;
     record zugMitWertung(Move zug, int bewertung) {}
 
 
