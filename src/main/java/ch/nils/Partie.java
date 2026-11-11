@@ -1,6 +1,7 @@
 package ch.nils;
 
 import com.github.bhlangonijr.chesslib.Board;
+import com.github.bhlangonijr.chesslib.Side;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class Partie {
         }
         return list;
     }
-    public static ArrayList<Double> nnPartieSpielenLassen(Player player1, Player player2, int howManyGames){
+    public static Double nnPartieSpielenLassen(Player player1, Player player2, int howManyGames, int score){
         ArrayList<Double> list = new ArrayList<Double>();
         for (int i = 0; i < howManyGames / 2; i++) {
             Board board = new Board();
@@ -76,6 +77,7 @@ public class Partie {
             } else if (wessenZugIstEs == 2) {
                 list.add(1.0);
             }
+            list.add(1 / (1 + Math.exp(-(double) Bewertung.material(board, Side.WHITE))) - 0.5);
         }
         for (int i = 0; i < howManyGames / 2; i++) {
             Board board = new Board();
@@ -92,13 +94,18 @@ public class Partie {
                 zähler++;
             }
             if (zähler > 499 || board.isDraw()) {
-                list.add(0);
+                list.add(0.5);
             } else if (wessenZugIstEs == 1) {
-                list.add(-1);
+                list.add(1.0);
             } else if (wessenZugIstEs == 2) {
-                list.add(1);
+                list.add(0.0);
             }
+            list.add(1 / (1 + Math.exp(-(double) Bewertung.material(board, Side.WHITE))) - 0.5);
         }
-        return list;
+        double ergebniss = 0;
+        for (int i = 0; i < list.size(); i++) {
+            ergebniss = ergebniss + list.get(i);
+        }
+        return ergebniss;
     }
 }

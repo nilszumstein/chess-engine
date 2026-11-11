@@ -56,37 +56,8 @@ public class NnTrainer {
 
             neuralNetworksArray.parallelStream().forEach(element -> {
                 element.generationErhöhen();
-                Integer[] ergebnisse = Partie.partieSpielenLassen(new NNPlayer(element), new RandomPlayer(), 20).toArray(new Integer[0]);
-                double score = 0;
-                for (int j = 0; j < ergebnisse.length; j++) {
-                    if (ergebnisse[j] == -1) {
-                    } else if (ergebnisse[j] == 0) {
-                        score = score + 0.5;
-                    } else {
-                        score++;
-                    }
-                }
-                score = score * 1;
-                element.setScore(score);
+                element.setScore(Partie.nnPartieSpielenLassen(new NNPlayer(element), new RandomPlayer(), 40, 1));
             });
-
-            /*
-            for (int i = 0; i < 100; i++) {
-                neuralNetworksArray.get(i).generationErhöhen();
-                Integer[] ergebnisse = Partie.partieSpielenLassen(new NNPlayer(neuralNetworksArray.get(i)), new RandomPlayer(), 20).toArray(new Integer[0]);
-                double score = 0;
-                for (int j = 0; j < ergebnisse.length; j++) {
-                    if (ergebnisse[j] == -1) {
-                    } else if (ergebnisse[j] == 0) {
-                        score = score + 0.5;
-                    } else {
-                        score++;
-                    }
-                }
-                score = score * 1;
-                neuralNetworksArray.get(i).setScore(score);
-            }
-             */
             neuralNetworksArray.sort(Comparator.comparingDouble(NeuralNetwork::getScore).reversed());
 
             for (int i = 0; i < 50; i++) {
