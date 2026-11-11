@@ -83,7 +83,7 @@ public class Partie {
             Board board = new Board();
             int wessenZugIstEs = 2;
             int zähler = 0;
-            while (!board.isMated() && !board.isDraw() && zähler < 500) {
+            while (!board.isMated() && !board.isDraw() && zähler < 150) {
                 if (wessenZugIstEs == 1) {
                     board.doMove(player1.chooseMove(board));
                     wessenZugIstEs = 2;
@@ -93,14 +93,14 @@ public class Partie {
                 }
                 zähler++;
             }
-            if (zähler > 499 || board.isDraw()) {
+            if (zähler > 149 || board.isDraw()) {
                 list.add(0.5);
             } else if (wessenZugIstEs == 1) {
-                list.add(1.0);
-            } else if (wessenZugIstEs == 2) {
                 list.add(0.0);
+            } else if (wessenZugIstEs == 2) {
+                list.add(1.0);
             }
-            list.add(1 / (1 + Math.exp(-(double) Bewertung.material(board, Side.WHITE))) - 0.5);
+            list.add(1 / (1 + Math.exp((-(double) (Bewertung.material(board, Side.BLACK))) / 200) - 0.5));
         }
         double ergebniss = 0;
         for (int i = 0; i < list.size(); i++) {
