@@ -53,4 +53,52 @@ public class Partie {
         }
         return list;
     }
+    public static ArrayList<Double> nnPartieSpielenLassen(Player player1, Player player2, int howManyGames){
+        ArrayList<Double> list = new ArrayList<Double>();
+        for (int i = 0; i < howManyGames / 2; i++) {
+            Board board = new Board();
+            int wessenZugIstEs = 1;
+            int zähler = 0;
+            while (!board.isMated() && !board.isDraw() && zähler < 150) {
+                if (wessenZugIstEs == 1) {
+                    board.doMove(player1.chooseMove(board));
+                    wessenZugIstEs = 2;
+                } else if (wessenZugIstEs == 2) {
+                    board.doMove(player2.chooseMove(board));
+                    wessenZugIstEs = 1;
+                }
+                zähler++;
+            }
+            if (zähler > 149 || board.isDraw()) {
+                list.add(0.5);
+            } else if (wessenZugIstEs == 1) {
+                list.add(0.0);
+            } else if (wessenZugIstEs == 2) {
+                list.add(1.0);
+            }
+        }
+        for (int i = 0; i < howManyGames / 2; i++) {
+            Board board = new Board();
+            int wessenZugIstEs = 2;
+            int zähler = 0;
+            while (!board.isMated() && !board.isDraw() && zähler < 500) {
+                if (wessenZugIstEs == 1) {
+                    board.doMove(player1.chooseMove(board));
+                    wessenZugIstEs = 2;
+                } else if (wessenZugIstEs == 2) {
+                    board.doMove(player2.chooseMove(board));
+                    wessenZugIstEs = 1;
+                }
+                zähler++;
+            }
+            if (zähler > 499 || board.isDraw()) {
+                list.add(0);
+            } else if (wessenZugIstEs == 1) {
+                list.add(-1);
+            } else if (wessenZugIstEs == 2) {
+                list.add(1);
+            }
+        }
+        return list;
+    }
 }
