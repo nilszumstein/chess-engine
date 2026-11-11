@@ -72,7 +72,7 @@ public class NnTrainer {
                     Files.deleteIfExists(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
                 }
             }
-            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (1 * 20));
+            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (60));
         }
     }
 
