@@ -17,7 +17,6 @@ Models
     Layerstruktur(als Name)
         Generation(als Name)
             Die 50 besten Bots
-                platzXX.bin
                     (Ein file soll so Aufgebaut werden, ummer zuerst score, generation, layersLänge, dann Layers. und erst dann alle bias und weights.
 
 
