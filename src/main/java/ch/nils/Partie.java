@@ -77,7 +77,7 @@ public class Partie {
             } else if (wessenZugIstEs == 2) {
                 list.add(1.0 * score);
             }
-            list.add(1 / (1 + Math.exp(-(double) (Bewertung.material(board, Side.WHITE)) / 200)) - 0.5);
+            list.add((1 / (1 + Math.exp(-(double) (Bewertung.material(board, Side.WHITE)) / 200)) - 0.5) * score);
         }
         for (int i = 0; i < howManyGames / 2; i++) {
             Board board = new Board();
