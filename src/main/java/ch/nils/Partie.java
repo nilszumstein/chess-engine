@@ -100,7 +100,7 @@ public class Partie {
             } else if (wessenZugIstEs == 2) {
                 list.add(1.0 * score);
             }
-            list.add(1 / (1 + Math.exp(-(double) (Bewertung.material(board, Side.BLACK)) / 200)) - 0.5);
+            list.add((1 / (1 + Math.exp(-(double) (Bewertung.material(board, Side.BLACK)) / 200)) - 0.5) * score);
         }
         double ergebniss = 0;
         for (int i = 0; i < list.size(); i++) {

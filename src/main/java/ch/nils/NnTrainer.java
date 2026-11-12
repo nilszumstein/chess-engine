@@ -19,6 +19,7 @@ public class NnTrainer {
     */
     static void main(String[] args) throws IOException {
         //Erstes immer 773 letztes immer 1
+        int score = 21;
         int[] layers = {773, 32, 32, 1};
 
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
@@ -56,7 +57,7 @@ public class NnTrainer {
 
             neuralNetworksArray.parallelStream().forEach(element -> {
                 element.generationErhöhen();
-                element.setScore(Partie.nnPartieSpielenLassen(new NNPlayer(element), new AlphaBetaV6Player(1), 40, 21));
+                element.setScore(Partie.nnPartieSpielenLassen(new NNPlayer(element), new AlphaBetaV6Player(1), 40, score));
             });
             neuralNetworksArray.sort(Comparator.comparingDouble(NeuralNetwork::getScore).reversed());
 
@@ -72,7 +73,7 @@ public class NnTrainer {
                     Files.deleteIfExists(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
                 }
             }
-            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (860));
+            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (score * 60));
         }
     }
 
