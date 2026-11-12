@@ -56,7 +56,7 @@ public class NnTrainer {
 
             neuralNetworksArray.parallelStream().forEach(element -> {
                 element.generationErhöhen();
-                element.setScore(Partie.nnPartieSpielenLassen(new NNPlayer(element), new RandomPlayer(), 40, 1));
+                element.setScore(Partie.nnPartieSpielenLassen(new NNPlayer(element), new AlphaBetaV6Player(1), 40, 21));
             });
             neuralNetworksArray.sort(Comparator.comparingDouble(NeuralNetwork::getScore).reversed());
 
@@ -72,7 +72,7 @@ public class NnTrainer {
                     Files.deleteIfExists(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
                 }
             }
-            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (60));
+            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (860));
         }
     }
 
