@@ -71,11 +71,6 @@ public class NeuralNetwork {
         }
     }
 
-
-
-
-
-
     void saveNetworkToFile(File file) throws IOException {
         Files.createDirectories(Path.of(file.getParent()));
         try(DataOutputStream  stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))){
@@ -99,33 +94,33 @@ public class NeuralNetwork {
             }
         }
     }
+
     public void generationErhöhen(){
         this.generation++;
     }
+
     public float howGoodIsBoard(float[] bitboard){
-        List<Float> zwispeiLayer1 = new ArrayList<Float>();
-        List<Float> zwispeiLayer2 = new ArrayList<Float>();
-        for (int i = 0; i < bitboard.length; i++) {
-            zwispeiLayer1.add(bitboard[i]);
-        }
+        float[] zwispeiLayer1 = bitboard;
+        float[] zwispeiLayer2;
         float kleinesZwischenspeichern;
         for (int i = 0; i < weights.size(); i++) {
+            zwispeiLayer2 = new float[layers[i + 1]];
             for (int j = 0; j < layers[i + 1]; j++) {
                 kleinesZwischenspeichern = 0f;
                 for (int k = 0; k < layers[i]; k++) {
-                    kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1.get(k) * weights.get(i)[k][j];
+                    kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1[k] * weights.get(i)[k][j];
                 }
                 kleinesZwischenspeichern = kleinesZwischenspeichern + bias.get(i)[j];
                 kleinesZwischenspeichern = (float) (1 / (1 + Math.exp(-kleinesZwischenspeichern)));
-                zwispeiLayer2.add(kleinesZwischenspeichern);
+                zwispeiLayer2[j] = kleinesZwischenspeichern;
             }
             zwispeiLayer1 = zwispeiLayer2;
-            zwispeiLayer2 = new ArrayList<>();
 
 
         }
-        return zwispeiLayer1.getFirst();
+        return zwispeiLayer1[0];
     }
+
     public void gewichteBiaseLeichtVerändern(){
         Random random = new Random();
         List<float[][]> initalWeights = this.weights;
@@ -150,6 +145,7 @@ public class NeuralNetwork {
         this.weights = initalWeights;
         this.bias = initalBias;
     }
+
     private void neuralNetworkInitialParameters(){
         Random random = new Random();
         List<float[][]> initalWeights = new ArrayList<>();

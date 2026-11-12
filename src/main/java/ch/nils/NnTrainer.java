@@ -1,8 +1,8 @@
 package ch.nils;
 
 
-import javax.swing.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,7 +73,12 @@ public class NnTrainer {
                     Files.deleteIfExists(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
                 }
             }
-            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + "; Maximum: " + (score * 60) + "; Minimum:" + (-score * 20) + "; Mit so viel Punkten zum nächsten Bot: " + (score * 40 * 0.75) + ";");
+            double averideg = 0;
+            for (int i = 0; i < neuralNetworksArray.size(); i++) {
+                averideg = averideg + neuralNetworksArray.get(i).getScore();
+            }
+            averideg = averideg / neuralNetworksArray.size();
+            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + "; Maximum: " + (score * 60) + "; Minimum:" + (-score * 20) + "; Mit so viel Punkten zum nächsten Bot: " + (score * 40 * 0.75) + "; Durchschnitt der besten 50: " + averideg + ";");
         }
     }
 
