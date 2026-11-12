@@ -3,62 +3,73 @@ package ch.nils;
 import com.github.bhlangonijr.chesslib.*;
 
 public class BoardAsNumber {
-    private static String als64bits(Long zahl){
-        String zahlalsstring = Long.toBinaryString(zahl);
-        while(zahlalsstring.length() < 64){
-            zahlalsstring = "0" + zahlalsstring;
-        }
-        return zahlalsstring;
-    }
-    public static float[] boardAsNumber(Board board){
-        String ergebnisAlsString = "";
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_PAWN));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_KNIGHT));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_BISHOP));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_ROOK));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_QUEEN));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.WHITE_KING));
 
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_PAWN));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_KNIGHT));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_BISHOP));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_ROOK));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_QUEEN));
-        ergebnisAlsString = ergebnisAlsString + als64bits(board.getBitboard(Piece.BLACK_KING));
+    public static float[] boardAsNumber(Board board){
+        Piece[] alleFigurenInRichtigerReienfolge = {Piece.WHITE_PAWN, Piece.WHITE_KNIGHT, Piece.WHITE_BISHOP, Piece.WHITE_ROOK, Piece.WHITE_QUEEN, Piece.WHITE_KING, Piece.BLACK_PAWN, Piece.BLACK_KNIGHT, Piece.BLACK_BISHOP, Piece.BLACK_ROOK, Piece.BLACK_QUEEN, Piece.BLACK_KING};
+        String ergebnisAlsString = "";
+        float[] grossesBitboard = new float[773];
+        int wo = 0;
+
+        for (int i = 0; i < alleFigurenInRichtigerReienfolge.length; i++) {
+            long zwispei = board.getBitboard(alleFigurenInRichtigerReienfolge[i]);
+            for (int j = 63; 0 <= j; j--) {
+                grossesBitboard[wo] = (zwispei >>> j) & 1L;
+                wo++;
+            }
+        }
+
 
         if(board.getSideToMove() == Side.WHITE){
-            ergebnisAlsString = ergebnisAlsString + "1";
+            grossesBitboard[wo] = 1;
         }else{
-            ergebnisAlsString = ergebnisAlsString + "0";
+            grossesBitboard[wo] = 0;
         }
+        wo++;
 
         CastleRight zwispei = board.getCastleRight(Side.WHITE);
         if(zwispei == CastleRight.KING_AND_QUEEN_SIDE){
-            ergebnisAlsString = ergebnisAlsString + "11";
+            grossesBitboard[wo] = 1;
         } else if (zwispei == CastleRight.KING_SIDE) {
-            ergebnisAlsString = ergebnisAlsString + "10";
+            grossesBitboard[wo] = 1;
         }else if (zwispei == CastleRight.QUEEN_SIDE) {
-            ergebnisAlsString = ergebnisAlsString + "01";
+            grossesBitboard[wo] = 0;
         }else{
-            ergebnisAlsString = ergebnisAlsString + "00";
+            grossesBitboard[wo] = 0;
         }
+        wo++;
+        if(zwispei == CastleRight.KING_AND_QUEEN_SIDE){
+            grossesBitboard[wo] = 1;
+        } else if (zwispei == CastleRight.KING_SIDE) {
+            grossesBitboard[wo] = 0;
+        }else if (zwispei == CastleRight.QUEEN_SIDE) {
+            grossesBitboard[wo] = 1;
+        }else{
+            grossesBitboard[wo] = 0;
+        }
+        wo++;
         zwispei = board.getCastleRight(Side.BLACK);
         if(zwispei == CastleRight.KING_AND_QUEEN_SIDE){
-            ergebnisAlsString = ergebnisAlsString + "11";
+            grossesBitboard[wo] = 1;
         } else if (zwispei == CastleRight.KING_SIDE) {
-            ergebnisAlsString = ergebnisAlsString + "10";
+            grossesBitboard[wo] = 1;
         }else if (zwispei == CastleRight.QUEEN_SIDE) {
-            ergebnisAlsString = ergebnisAlsString + "01";
+            grossesBitboard[wo] = 0;
         }else{
-            ergebnisAlsString = ergebnisAlsString + "00";
+            grossesBitboard[wo] = 0;
         }
-        float[] turns = new float[773];
-        for (int i = 0; i < 773; i++) {
-            turns[i] = Float.parseFloat(ergebnisAlsString.charAt(i) + "");
+        wo++;
+        if(zwispei == CastleRight.KING_AND_QUEEN_SIDE){
+            grossesBitboard[wo] = 1;
+        } else if (zwispei == CastleRight.KING_SIDE) {
+            grossesBitboard[wo] = 0;
+        }else if (zwispei == CastleRight.QUEEN_SIDE) {
+            grossesBitboard[wo] = 1;
+        }else{
+            grossesBitboard[wo] = 0;
         }
 
 
-        return turns;
+        return grossesBitboard;
 
     }
 }
