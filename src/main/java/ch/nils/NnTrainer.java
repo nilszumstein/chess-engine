@@ -73,7 +73,7 @@ public class NnTrainer {
                     Files.deleteIfExists(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + (generation - 2) + "/" + i).toPath());
                 }
             }
-            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + " von " + (score * 60) + "; Der minimale Score währe :" + (-score * 20));
+            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + "; Maximum: " + (score * 60) + "; Minimum:" + (-score * 20) + "; Mit so viel Punkten zum nächsten Bot: " + (score * 40 * 0.75) + ";");
         }
     }
 
