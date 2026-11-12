@@ -71,11 +71,11 @@ public class Partie {
                 zähler++;
             }
             if (zähler > 149 || board.isDraw()) {
-                list.add(0.5);
+                list.add(0.5 * score);
             } else if (wessenZugIstEs == 1) {
-                list.add(0.0);
+                list.add(0.0 * score);
             } else if (wessenZugIstEs == 2) {
-                list.add(1.0);
+                list.add(1.0 * score);
             }
             list.add(1 / (1 + Math.exp(-(double) (Bewertung.material(board, Side.WHITE)) / 200)) - 0.5);
         }
@@ -94,11 +94,11 @@ public class Partie {
                 zähler++;
             }
             if (zähler > 149 || board.isDraw()) {
-                list.add(0.5);
+                list.add(0.5 * score);
             } else if (wessenZugIstEs == 1) {
-                list.add(0.0);
+                list.add(0.0 * score);
             } else if (wessenZugIstEs == 2) {
-                list.add(1.0);
+                list.add(1.0 * score);
             }
             list.add(1 / (1 + Math.exp(-(double) (Bewertung.material(board, Side.BLACK)) / 200)) - 0.5);
         }
