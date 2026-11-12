@@ -102,21 +102,20 @@ public class NeuralNetwork {
     public float howGoodIsBoard(float[] bitboard){
         float[] zwispeiLayer1 = bitboard;
         float[] zwispeiLayer2;
-        float kleinesZwischenspeichern;
         for (int i = 0; i < weights.size(); i++) {
             zwispeiLayer2 = new float[layers[i + 1]];
-            for (int j = 0; j < layers[i + 1]; j++) {
-                kleinesZwischenspeichern = 0f;
-                for (int k = 0; k < layers[i]; k++) {
-                    kleinesZwischenspeichern = kleinesZwischenspeichern + zwispeiLayer1[k] * weights.get(i)[k][j];
+            for (int j = 0; j < layers[i]; j++) {
+                if(zwispeiLayer1[j] == 0){
+                }else {
+                    for (int k = 0; k < layers[i + 1]; k++) {
+                        zwispeiLayer2[k] = zwispeiLayer2[k] + weights.get(i)[j][k] * zwispeiLayer1[j];
+                    }
                 }
-                kleinesZwischenspeichern = kleinesZwischenspeichern + bias.get(i)[j];
-                kleinesZwischenspeichern = (float) (1 / (1 + Math.exp(-kleinesZwischenspeichern)));
-                zwispeiLayer2[j] = kleinesZwischenspeichern;
+            }
+            for (int j = 0; j < layers[i + 1]; j++) {
+                zwispeiLayer2[j] = (float) (1 / (1 + Math.exp(-(zwispeiLayer2[j] + bias.get(i)[j]))));
             }
             zwispeiLayer1 = zwispeiLayer2;
-
-
         }
         return zwispeiLayer1[0];
     }
