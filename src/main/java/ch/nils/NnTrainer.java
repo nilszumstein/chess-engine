@@ -20,7 +20,7 @@ public class NnTrainer {
     static void main(String[] args) throws IOException {
         //Erstes immer 773 letztes immer 1
         int score = 21;
-        int[] layers = {773, 16, 8, 1};
+        int[] layers = {773, 32, 32, 1};
 
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class NnTrainer {
 
             generation++;
             for (int i = 50; i < 100; i++) {
-                neuralNetworksArray.get(i).wenigeGewichteBiaseLeichtVerändern(0.001);
+                neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern(0.001);
             }
 
             neuralNetworksArray.parallelStream().forEach(element -> {

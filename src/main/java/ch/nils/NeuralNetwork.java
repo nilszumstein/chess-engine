@@ -121,32 +121,7 @@ public class NeuralNetwork {
         return zwispeiLayer1[0];
     }
 
-    public void alleGewichteBiaseLeichtVerändern(){
-        Random random = new Random();
-        List<float[][]> initalWeights = this.weights;
-        List<float[]> initalBias = this.bias;
-
-        for (int i = 0; i < initalBias.size(); i++) {
-            for (int j = 0; j < initalBias.get(i).length; j++) {
-                float[] copyOfBiasOne = initalBias.get(i);
-                copyOfBiasOne[j] = copyOfBiasOne[j] + (float) (random.nextGaussian() / 100);
-                initalBias.set(i, copyOfBiasOne);
-            }
-        }
-        for (int i = 0; i < initalWeights.size(); i++) {
-            for (int j = 0; j < initalWeights.get(i).length; j++) {
-                for (int k = 0; k < initalWeights.get(i)[j].length; k++) {
-                    float[][] copyOfWeightOne = initalWeights.get(i);
-                    copyOfWeightOne[j][k] = copyOfWeightOne[j][k] + (float) (random.nextGaussian() / 100);
-                    initalWeights.set(i, copyOfWeightOne);
-                }
-            }
-        }
-        this.weights = initalWeights;
-        this.bias = initalBias;
-    }
-
-    public void wenigeGewichteBiaseLeichtVerändern(double warscheinlichkeitZuMutieren){
+    public void gewichteBiaseLeichtVerändern(double warscheinlichkeitZuMutieren){
         Random random = new Random();
         List<float[][]> initalWeights = this.weights;
         List<float[]> initalBias = this.bias;
@@ -155,7 +130,7 @@ public class NeuralNetwork {
             for (int j = 0; j < initalBias.get(i).length; j++) {
                 if(random.nextFloat(0, 1) < warscheinlichkeitZuMutieren) {
                     float[] copyOfBiasOne = initalBias.get(i);
-                    copyOfBiasOne[j] = copyOfBiasOne[j] + (float) (random.nextGaussian() / 100);
+                    copyOfBiasOne[j] = copyOfBiasOne[j] + (float) (random.nextGaussian() / (100 * Math.sqrt(warscheinlichkeitZuMutieren)));
                     initalBias.set(i, copyOfBiasOne);
                 }
             }
