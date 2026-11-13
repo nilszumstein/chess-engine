@@ -140,7 +140,7 @@ public class NeuralNetwork {
                 for (int k = 0; k < initalWeights.get(i)[j].length; k++) {
                     if(random.nextFloat(0, 1) < warscheinlichkeitZuMutieren) {
                         float[][] copyOfWeightOne = initalWeights.get(i);
-                        copyOfWeightOne[j][k] = copyOfWeightOne[j][k] + (float) (random.nextGaussian() / 100);
+                        copyOfWeightOne[j][k] = copyOfWeightOne[j][k] + (float) (random.nextGaussian() / (100 * Math.sqrt(warscheinlichkeitZuMutieren)));
                         initalWeights.set(i, copyOfWeightOne);
                     }
                 }
