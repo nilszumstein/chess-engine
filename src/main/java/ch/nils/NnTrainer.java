@@ -52,7 +52,7 @@ public class NnTrainer {
 
             generation++;
             for (int i = 50; i < 100; i++) {
-                neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern(0.001);
+                neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern(0.01);
             }
 
             neuralNetworksArray.parallelStream().forEach(element -> {
