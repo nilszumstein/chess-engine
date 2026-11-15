@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        Player player1 = new NNPlayer(new NeuralNetwork(new File("Models/allDiffrentLayers/[773, 16, 16, 1]/1/0")));
-        Player player2 = new NNPlayer(new NeuralNetwork(new File("Models/allDiffrentLayers/[773, 16, 16, 1]/242/0")));
-        ArrayList<Integer> list = Partie.partieSpielenLassen(player1, player2, 5000);
+        Player player1 = new AlphaBetaV6Player(1);
+        Player player2 = new NNPlayer(new NeuralNetwork(new File("Models/allDiffrentLayers/[773, 32, 32, 1]/3938/0")));
+        ArrayList<Integer> list = Partie.partieSpielenLassen(player1, player2, 50);
         int unentschieden = 0;
         int siegePlayer1 = 0;
         int siegePlayer2 = 0;
