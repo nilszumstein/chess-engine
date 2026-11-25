@@ -92,7 +92,7 @@ public class NnTrainer {
         if (generation == 0) {
             neuralNetworksArray = makeNewRandom(layers);
         } else {
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 20; i++) {
                 neuralNetworksArray.add(new NeuralNetwork(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + i)));
             }
         }
@@ -101,12 +101,10 @@ public class NnTrainer {
 
 
             if (!(generation == 0)) {
-                File[] ordnersNeu = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/").listFiles(File::isDirectory);
-                int zählerFürNeueGernerationen = ordnersNeu.length;
-                while (zählerFürNeueGernerationen < 100) {
-                    File file = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + zählerFürNeueGernerationen);
+                while (neuralNetworksArray.size() < 100){
+                    int welcher = neuralNetworksArray.size()% 20;
+                    File file = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + welcher);
                     neuralNetworksArray.add(new NeuralNetwork(file));
-                    zählerFürNeueGernerationen++;
                 }
             }
 
@@ -180,7 +178,7 @@ public class NnTrainer {
                 averideg = averideg + neuralNetworksArray.get(i).getScore();
             }
             averideg = averideg / neuralNetworksArray.size();
-            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + "; Maximum: " + (score * 60) + "; Minimum:" + (-score * 20) + "; Mit so viel Punkten zum nächsten Bot: " + (score * 40 * 0.75) + "; Durchschnitt der besten 50: " + averideg + ";");
+            System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + "; Maximum: " + (score * 60) + "; Minimum:" + (-score * 20) + "; Mit so viel Punkten zum nächsten Bot: " + (score * 40 * 0.75) + "; Durchschnitt der besten 20: " + averideg + ";");
         }
     }
 
