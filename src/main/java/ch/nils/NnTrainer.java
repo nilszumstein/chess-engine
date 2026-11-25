@@ -51,6 +51,7 @@ public class NnTrainer {
             generation++;
             for (int i = 50; i < 100; i++) {
                 neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern(mutatePossability);
+                neuralNetworksArray.get(i).setHowGeneratet("RandomChanceToMutate. Probability: " + mutatePossability);
             }
 
             neuralNetworksArray.parallelStream().forEach(element -> {
@@ -112,12 +113,15 @@ public class NnTrainer {
             generation++;
             for (int i = 20; i < 40; i++) {
                 neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern(0.01);
+                neuralNetworksArray.get(i).setHowGeneratet("RandomChanceToMutate. Probability: 0.01");
             }
             for (int i = 40; i < 60; i++) {
                 neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern(0.1);
+                neuralNetworksArray.get(i).setHowGeneratet("RandomChanceToMutate. Probability: 0.1");
             }
             for (int i = 60; i < 80; i++) {
                 neuralNetworksArray.get(i).gewichteBiaseLeichtVerändern(0.05);
+                neuralNetworksArray.get(i).setHowGeneratet("RandomChanceToMutate. Probability: 0.05");
             }
             for (int i = 80; i < 100; i++) {
                 Random random = new Random();
@@ -151,7 +155,7 @@ public class NnTrainer {
                     }
                 }
                 neuralNetworksArray.get(i).setBias(biases);
-
+                neuralNetworksArray.get(i).setHowGeneratet("Kreuzung der Eltern");
             }
 
 

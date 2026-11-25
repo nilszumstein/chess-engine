@@ -13,23 +13,23 @@ public class NeuralNetwork {
     private List<float[]> bias;
 
 
-
     private int[] layers;
     private double score;
     private int generation;
-
+    private String howGeneratet = "ungeändert";
 
 
     public NeuralNetwork(File file) {
         loadNetworkFromFile(file);
     }
+
     public NeuralNetwork(int[] layers) {
         this.layers = layers;
         neuralNetworkInitialParameters();
     }
 
 
-    void loadNetworkFromFile(File file){
+    void loadNetworkFromFile(File file) {
         try (DataInputStream fileImporter = new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
             List<float[][]> initalWeights = new ArrayList<>();
             List<float[]> initalBias = new ArrayList<>();
@@ -65,8 +65,7 @@ public class NeuralNetwork {
             }
             this.weights = initalWeights;
             this.bias = initalBias;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            this.howGeneratet = String.valueOf(fileImporter.readByte());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -74,7 +73,7 @@ public class NeuralNetwork {
 
     void saveNetworkToFile(File file) throws IOException {
         Files.createDirectories(Path.of(file.getParent()));
-        try(DataOutputStream  stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))){
+        try (DataOutputStream stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
             stream.writeDouble(score);
             stream.writeInt(generation);
             stream.writeInt(layers.length);
@@ -93,21 +92,22 @@ public class NeuralNetwork {
                     }
                 }
             }
+            stream.write(howGeneratet.getBytes());
         }
     }
 
-    public void generationErhöhen(){
+    public void generationErhöhen() {
         this.generation++;
     }
 
-    public float howGoodIsBoard(float[] bitboard){
+    public float howGoodIsBoard(float[] bitboard) {
         float[] zwispeiLayer1 = bitboard;
         float[] zwispeiLayer2;
         for (int i = 0; i < weights.size(); i++) {
             zwispeiLayer2 = new float[layers[i + 1]];
             for (int j = 0; j < layers[i]; j++) {
-                if(zwispeiLayer1[j] == 0){
-                }else {
+                if (zwispeiLayer1[j] == 0) {
+                } else {
                     for (int k = 0; k < layers[i + 1]; k++) {
                         zwispeiLayer2[k] = zwispeiLayer2[k] + weights.get(i)[j][k] * zwispeiLayer1[j];
                     }
@@ -121,14 +121,14 @@ public class NeuralNetwork {
         return zwispeiLayer1[0];
     }
 
-    public void gewichteBiaseLeichtVerändern(double warscheinlichkeitZuMutieren){
+    public void gewichteBiaseLeichtVerändern(double warscheinlichkeitZuMutieren) {
         Random random = new Random();
         List<float[][]> initalWeights = this.weights;
         List<float[]> initalBias = this.bias;
 
         for (int i = 0; i < initalBias.size(); i++) {
             for (int j = 0; j < initalBias.get(i).length; j++) {
-                if(random.nextFloat(0, 1) < warscheinlichkeitZuMutieren) {
+                if (random.nextFloat(0, 1) < warscheinlichkeitZuMutieren) {
                     float[] copyOfBiasOne = initalBias.get(i);
                     copyOfBiasOne[j] = copyOfBiasOne[j] + (float) (random.nextGaussian() / (100 * Math.sqrt(warscheinlichkeitZuMutieren)));
                     initalBias.set(i, copyOfBiasOne);
@@ -138,7 +138,7 @@ public class NeuralNetwork {
         for (int i = 0; i < initalWeights.size(); i++) {
             for (int j = 0; j < initalWeights.get(i).length; j++) {
                 for (int k = 0; k < initalWeights.get(i)[j].length; k++) {
-                    if(random.nextFloat(0, 1) < warscheinlichkeitZuMutieren) {
+                    if (random.nextFloat(0, 1) < warscheinlichkeitZuMutieren) {
                         float[][] copyOfWeightOne = initalWeights.get(i);
                         copyOfWeightOne[j][k] = copyOfWeightOne[j][k] + (float) (random.nextGaussian() / (100 * Math.sqrt(warscheinlichkeitZuMutieren)));
                         initalWeights.set(i, copyOfWeightOne);
@@ -150,7 +150,7 @@ public class NeuralNetwork {
         this.bias = initalBias;
     }
 
-    private void neuralNetworkInitialParameters(){
+    private void neuralNetworkInitialParameters() {
         Random random = new Random();
         List<float[][]> initalWeights = new ArrayList<>();
         List<float[]> initalBias = new ArrayList<>();
@@ -185,31 +185,48 @@ public class NeuralNetwork {
     public double getScore() {
         return score;
     }
+
     public void setScore(double score) {
         this.score = score;
     }
+
     public int getGeneration() {
         return generation;
     }
+
     public void setGeneration(int generation) {
         this.generation = generation;
     }
+
     public int[] getLayers() {
         return layers;
     }
+
     public void setLayers(int[] layers) {
         this.layers = layers;
     }
+
     public List<float[][]> getWeights() {
         return weights;
     }
+
     public void setWeights(List<float[][]> weights) {
         this.weights = weights;
     }
+
     public List<float[]> getBias() {
         return bias;
     }
+
     public void setBias(List<float[]> bias) {
         this.bias = bias;
+    }
+
+    public String getHowGeneratet() {
+        return howGeneratet;
+    }
+
+    public void setHowGeneratet(String howGeneratet) {
+        this.howGeneratet = howGeneratet;
     }
 }
