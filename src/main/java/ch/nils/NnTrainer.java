@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
 
-import static java.lang.Math.random;
-
 
 public class NnTrainer {
     static void main(String[] args) throws IOException {
@@ -17,7 +15,7 @@ public class NnTrainer {
         double passabilityToMutate = 0.01;
 
 
-        generateTwentyTwentyTwentyTwentyTwenty(score,layers,gegner);
+        generateTwentyTwentyTwentyTwentyTwenty(score, layers, gegner);
         //generateWithNwarscheinlichkeit(score,layers,passabilityToMutate,gegner);
     }
 
@@ -26,20 +24,20 @@ public class NnTrainer {
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
         File[] ordners = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/").listFiles(File::isDirectory);
         int generation = 0;
-        if(!(ordners == null)){
+        if (!(ordners == null)) {
             generation = ordners.length;
         }
 
 
-        if(generation == 0){
+        if (generation == 0) {
             neuralNetworksArray = makeNewRandom(layers);
-        }else{
+        } else {
             for (int i = 0; i < 50; i++) {
                 neuralNetworksArray.add(new NeuralNetwork(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + i)));
             }
         }
 
-        while(true) {
+        while (true) {
 
 
             if (!(generation == 0)) {
@@ -81,27 +79,25 @@ public class NnTrainer {
             System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + "; Maximum: " + (score * 60) + "; Minimum:" + (-score * 20) + "; Mit so viel Punkten zum nächsten Bot: " + (score * 40 * 0.75) + "; Durchschnitt der besten 50: " + averideg + ";");
         }
     }
+
     static void generateTwentyTwentyTwentyTwentyTwenty(int score, int[] layers, Player gegner) throws IOException {
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
         File[] ordners = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/").listFiles(File::isDirectory);
         int generation = 0;
-        if(!(ordners == null)){
+        if (!(ordners == null)) {
             generation = ordners.length;
         }
 
 
-        if(generation == 0){
+        if (generation == 0) {
             neuralNetworksArray = makeNewRandom(layers);
-        }else{
+        } else {
             for (int i = 0; i < 50; i++) {
                 neuralNetworksArray.add(new NeuralNetwork(new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/" + generation + "/" + i)));
             }
         }
 
-        while(true) {
-
-
-
+        while (true) {
 
 
             if (!(generation == 0)) {
@@ -130,34 +126,33 @@ public class NnTrainer {
                 NeuralNetwork parent1 = neuralNetworksArray.get(random.nextInt(0, 20));
                 NeuralNetwork parent2 = neuralNetworksArray.get(random.nextInt(0, 20));
                 List<float[][]> weigths = neuralNetworksArray.get(i).getWeights();
-                List<float[][]> biases = neuralNetworksArray.get(i).getWeights();
-
+                List<float[]> biases = neuralNetworksArray.get(i).getBias();
 
 
                 for (int j = 0; j < weigths.size(); j++) {
                     for (int k = 0; k < weigths.get(j).length; k++) {
                         for (int l = 0; l < weigths.get(j)[k].length; l++) {
                             int zwispei = random.nextInt(0, 2);
-                            if(zwispei == 1){
-                                weigths(j)[k][l] = parent1.getWeights().get(j)[k][l];
-                            }else{
-                                weigths(j)[k][l] = parent2.getWeights().get(j)[k][l];
+                            if (zwispei == 1) {
+                                weigths.get(j)[k][l] = parent1.getWeights().get(j)[k][l];
+                            } else {
+                                weigths.get(j)[k][l] = parent2.getWeights().get(j)[k][l];
                             }
                         }
                     }
                 }
-                neuralNetworksArray.set(i).setWeights(weigths);
+                neuralNetworksArray.get(i).setWeights(weigths);
                 for (int j = 0; j < biases.size(); j++) {
                     for (int k = 0; k < biases.get(j).length; k++) {
                         int zwispei = random.nextInt(0, 2);
-                        if(zwispei == 1){
-                            biases(j)[k] = parent1.getBias().get(j)[k];
-                        }else{
-                            biases(j)[k] = parent2.getBias().get(j)[k];
+                        if (zwispei == 1) {
+                            biases.get(j)[k] = parent1.getBias().get(j)[k];
+                        } else {
+                            biases.get(j)[k] = parent2.getBias().get(j)[k];
                         }
                     }
                 }
-                neuralNetworksArray.set(i).setBias(biases);
+                neuralNetworksArray.get(i).setBias(biases);
 
             }
 
@@ -188,7 +183,8 @@ public class NnTrainer {
             System.out.println("Generation: " + generation + "; Score, des besten: " + neuralNetworksArray.getFirst().getScore() + "; Maximum: " + (score * 60) + "; Minimum:" + (-score * 20) + "; Mit so viel Punkten zum nächsten Bot: " + (score * 40 * 0.75) + "; Durchschnitt der besten 50: " + averideg + ";");
         }
     }
-    private static ArrayList<NeuralNetwork> makeNewRandom(int[] layers){
+
+    private static ArrayList<NeuralNetwork> makeNewRandom(int[] layers) {
 
         ArrayList<NeuralNetwork> nNs = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
