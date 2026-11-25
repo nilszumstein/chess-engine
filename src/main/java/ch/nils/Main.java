@@ -1,5 +1,7 @@
 package ch.nils;
 
+import ch.nils.OldPlayersNoMoreUpdates.NNPlayer;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

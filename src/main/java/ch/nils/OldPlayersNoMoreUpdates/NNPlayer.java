@@ -1,5 +1,8 @@
-package ch.nils;
+package ch.nils.OldPlayersNoMoreUpdates;
 
+import ch.nils.BoardAsNumber;
+import ch.nils.NeuralNetwork;
+import ch.nils.Player;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.move.Move;

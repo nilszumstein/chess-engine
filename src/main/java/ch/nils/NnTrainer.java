@@ -1,6 +1,8 @@
 package ch.nils;
 
 
+import ch.nils.OldPlayersNoMoreUpdates.NNPlayer;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,11 +18,11 @@ public class NnTrainer {
 
 
         generateTwentyTwentyTwentyTwentyTwenty(score, layers, gegner);
-        //generateWithNwarscheinlichkeit(score,layers,passabilityToMutate,gegner);
+        generateWithwarscheinlichkeit(score,layers,passabilityToMutate,gegner);
     }
 
 
-    static void generateWithNwarscheinlichkeit(int score, int[] layers, double mutatePossability, Player gegner) throws IOException {
+    static void generateWithwarscheinlichkeit(int score, int[] layers, double mutatePossability, Player gegner) throws IOException {
         ArrayList<NeuralNetwork> neuralNetworksArray = new ArrayList<>();
         File[] ordners = new File("Models/allDiffrentLayers/" + Arrays.toString(layers) + "/").listFiles(File::isDirectory);
         int generation = 0;
